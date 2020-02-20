@@ -45,10 +45,10 @@ class google_search(commands.Cog):
         self.bot = bot
 
     @commands.command(name="igfd", aliases=["google"])
-    async def google_search(self, ctx, *, search=None):
+    async def google_search(self, ctx, *, arg=None):
         """Erstellt einen IGFD Link"""
-        search = search.replace(" ", "+")
-        search_url = f"http://www.igfd.org/?q={search}"
+        arg = arg.replace(" ", "+")
+        search_url = f"http://www.igfd.org/?q={arg}"
         await ctx.send(search_url)
 
 
@@ -84,6 +84,7 @@ class why(commands.Cog):
 
     @commands.command(aliases=["warum"])
     async def why(self, ctx):
+        """Erklärt den Namen des Bots"""
         embed = discord.Embed(
             title="Das Leben des Brian",
             colour=0xE74C3C,
