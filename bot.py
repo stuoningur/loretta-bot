@@ -9,7 +9,6 @@ load_dotenv()
 bot_token = os.getenv("BOT_TOKEN")
 owner_id = int(os.getenv("OWNER_ID"))
 bot_activity = os.getenv("BOT_ACTIVITY")
-tenor_api_key = os.getenv("TENOR_API")
 
 bot = commands.Bot(
     command_prefix=commands.when_mentioned_or("!"),
@@ -17,6 +16,8 @@ bot = commands.Bot(
     case_insensitive=True,
     owner_id=owner_id,
 )
+
+bot.tenor = os.getenv("TENOR_API")
 
 bot.load_extension("cogs.admin_tools")
 bot.load_extension("cogs.fun")

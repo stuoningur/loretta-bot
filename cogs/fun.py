@@ -5,8 +5,6 @@ import discord
 import requests
 from discord.ext import commands
 
-from bot import tenor_api_key
-
 
 class magic_ball(commands.Cog):
     def __init__(self, bot):
@@ -40,44 +38,6 @@ class magic_ball(commands.Cog):
         await ctx.send(f"Frage: {arg}\nAntwort: {random.choice(responses)}")
 
 
-class google_search(commands.Cog):
-    def __init__(self, bot):
-        self.bot = bot
-
-    @commands.command(name="igfd", aliases=["google"])
-    async def google_search(self, ctx, *, arg=None):
-        """Erstellt einen IGFD Link"""
-        arg = arg.replace(" ", "+")
-        search_url = f"http://www.igfd.org/?q={arg}"
-        await ctx.send(search_url)
-
-
-class gif(commands.Cog):
-    def __init__(self, bot):
-        self.bot = bot
-
-    @commands.command(aliases=["gifs"])
-    async def gif(self, ctx, *, arg):
-        """Sucht die Top 10 gifs für das Argument und gibt ein Ergebnis zufällig wieder"""
-        lmt = 10
-        print(tenor_api_key)
-        api_request = requests.get(
-            f"https://api.tenor.com/v1/search?q={arg}&key={tenor_api_key}&limit={lmt}"
-        )
-
-        gifs = []
-        if api_request.status_code == 200:
-            top_8gifs = json.loads(api_request.content)
-            for gif in top_8gifs["results"]:
-                gifs.append(gif["itemurl"])
-            if gifs:
-                await ctx.send(random.choice(gifs))
-            else:
-                return
-        else:
-            return
-
-
 class why(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
@@ -99,12 +59,49 @@ class why(commands.Cog):
             url="https://de.wikipedia.org/wiki/Monty_Python",
             icon_url="https://i.imgur.com/1l78cyO.jpg",
         )
-
         await ctx.send(embed=embed)
+
+
+class gif(commands.Cog):
+    def __init__(self, bot):
+        self.bot = bot
+        self.tenor_api = self.bot.tenor
+
+    @commands.command(aliases=["gifs"])
+    async def gif(self, ctx, *, arg):
+        """Sucht die Top 10 gifs für das Argument und gibt ein Ergebnis zufällig wieder"""
+        lmt = 10
+        api_request = requests.get(
+            f"https://api.tenor.com/v1/search?q={arg}&key={self.tenor_api}&limit={lmt}"
+        )
+
+        gifs = []
+        if api_request.status_code == 200:
+            top_8gifs = json.loads(api_request.content)
+            for gif in top_8gifs["results"]:
+                gifs.append(gif["itemurl"])
+            if gifs:
+                await ctx.send(random.choice(gifs))
+            else:
+                return
+        else:
+            return
+
+
+class google_search(commands.Cog):
+    def __init__(self, bot):
+        self.bot = bot
+
+    @commands.command(name="igfd", aliases=["google"])
+    async def google_search(self, ctx, *, arg=None):
+        """Erstellt einen IGFD Link"""
+        arg = arg.replace(" ", "+")
+        search_url = f"http://www.igfd.org/?q={arg}"
+        await ctx.send(search_url)
 
 
 def setup(bot):
     bot.add_cog(magic_ball(bot))
+    bot.add_cog(why(bot))
     bot.add_cog(google_search(bot))
     bot.add_cog(gif(bot))
-    bot.add_cog(why(bot))
