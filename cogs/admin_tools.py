@@ -58,9 +58,33 @@ class kick(commands.Cog):
         await member.kick(reason=reason)
 
 
+class load(commands.Cog):
+    def __init__(self, bot):
+        self.bot = bot
+
+    @commands.command()
+    @commands.is_owner()
+    async def load(self, ctx, extension=None):
+        """Laden einer neuen Erweiterung"""
+        self.bot.load_extension(extension)
+
+    @commands.command()
+    @commands.is_owner()
+    async def unload(self, ctx, extension=None):
+        """Entladen einer Erweiterung"""
+        self.bot.unload_extension(extension)
+
+    @commands.command()
+    @commands.is_owner()
+    async def reload(self, ctx, extension=None):
+        """Neuladen einer Erweiterung"""
+        self.bot.reload_extension(extension)
+
+
 def setup(bot):
     bot.add_cog(shutdown(bot))
     bot.add_cog(purge(bot))
     bot.add_cog(ban(bot))
     bot.add_cog(unban(bot))
     bot.add_cog(kick(bot))
+    bot.add_cog(load(bot))

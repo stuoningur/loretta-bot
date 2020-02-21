@@ -38,7 +38,7 @@ class cpu(commands.Cog):
             title="CPU und Bios Guide für Ryzen 3000 (und älter)",
             colour=0xE74C3C,
             url="https://www.computerbase.de/forum/threads/cpu-und-bios-guide-fuer-ryzen-3000-und-aelter.1911429/",
-            description="Erklärungen sowie Tipps um das beste aus der CPU rauszuholen",
+            description="Erklärungen und Tipps um das beste aus einer AMD Ryzen CPU rauszuholen.",
         )
 
         embed.set_image(url="https://i.imgur.com/jC0K8W8.png")
@@ -63,7 +63,7 @@ class limit(commands.Cog):
             title="Ryzen RAM OC Thread + Mögliche Limitierungen",
             colour=0xE74C3C,
             url="https://www.hardwareluxx.de/community/threads/ryzen-ram-oc-thread-m%C3%B6gliche-limitierungen.1216557/",
-            description="In diesem Thread werde ich Informationen zum Thema RAM OC Allgemein sammeln, sowie nennenswerte Anleitungen oder Threads verlinken. Habt ihr Fragen zum Thema RAM OC oder braucht Hilfe euren RAM zu übertakten, dann seid ihr hier im richtigen Thread. Zögert nicht zu fragen, wir helfen gerne weiter",
+            description="In diesem Thread werde ich Informationen zum Thema RAM OC Allgemein sammeln, sowie nennenswerte Anleitungen oder Threads verlinken. Habt ihr Fragen zum Thema RAM OC oder braucht Hilfe euren RAM zu übertakten, dann seid ihr hier im richtigen Thread. Zögert nicht zu fragen, wir helfen gerne weiter.",
         )
 
         embed.set_image(url="https://i.imgur.com/isFPomg.png")
@@ -81,7 +81,7 @@ class mainboard(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.command(aliases=["mobo", "motherboard"])
+    @commands.command(aliases=["mobo", "motherboard", "vrm"])
     async def mainboard(self, ctx):
         """Link zum Hardwareluxx AM4 VRM Thread"""
         embed = discord.Embed(
@@ -102,31 +102,31 @@ class mainboard(commands.Cog):
         await ctx.send(embed=embed)
 
 
-# TODO
-
-
 class manual(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
     @commands.command(aliases=["anleitung"])
     async def manual(self, ctx):
-        """Link zu dem Community CPU und Bios Guide"""
+        """Link zu der RAM OC Anleitung"""
         embed = discord.Embed(
-            title="CPU und Bios Guide für Ryzen 3000 (und älter)",
+            title="RAM OC Anleitung",
             colour=0xE74C3C,
-            url="https://www.computerbase.de/forum/threads/cpu-und-bios-guide-fuer-ryzen-3000-und-aelter.1911429/",
-            description="Erklärungen sowie Tipps um das beste aus der CPU rauszuholen",
+            url="https://www.computerbase.de/forum/threads/amd-ryzen-ram-oc-community.1829356/",
+            description="Version 2.01 (29.09.2019)\n\nWir versuchen nicht nur höhere RAM-Taktstufen zu erreichen, sondern auch die dazugehörigen Haupt- & Subtimings auf das System abgestimmt zu optimieren.",
         )
-
-        embed.set_image(url="https://i.imgur.com/jC0K8W8.png")
-        embed.set_thumbnail(url="https://i.imgur.com/jb4sJxq.png")
+        embed.add_field(
+            name="Download",
+            value="[Link zur PDF Anleitung](https://cdn.discordapp.com/attachments/506901533821239317/627968448500072448/RAM_OC_Anleitung_Vers_2_10.pdf)",
+        )
+        embed.set_image(url="https://i.imgur.com/4hCP34S.png")
+        embed.set_thumbnail(url="https://i.imgur.com/W83EAab.png")
         embed.set_author(
-            name="Verangry",
-            url="https://www.computerbase.de/forum/members/verangry.798158/",
-            icon_url="https://i.imgur.com/mu0em6U.png",
+            name="cm87",
+            url="https://www.computerbase.de/forum/members/cm87.771841/",
+            icon_url="https://i.imgur.com/Fci12gO.png",
         )
-        embed.set_footer(text="Channel: <#612647199737774104>")
+        embed.set_footer(text="Channel: <#590260218512932919>")
         await ctx.send(embed=embed)
 
 
@@ -136,20 +136,20 @@ class ramkit(commands.Cog):
 
     @commands.command(aliases=["ramkits", "ram"])
     async def ramkit(self, ctx):
-        """Link zu dem Community CPU und Bios Guide"""
+        """Link zum Computerbase RAM-Empfehlungen Artikel"""
         embed = discord.Embed(
-            title="CPU und Bios Guide für Ryzen 3000 (und älter)",
+            title="Aus der Community: RAM-Empfehlungen für AMD Ryzen und Intel Core",
             colour=0xE74C3C,
-            url="https://www.computerbase.de/forum/threads/cpu-und-bios-guide-fuer-ryzen-3000-und-aelter.1911429/",
-            description="Erklärungen sowie Tipps um das beste aus der CPU rauszuholen",
+            url="https://www.computerbase.de/thema/ram/rangliste/",
+            description="In der Prozessor- und der Grafikkarten-Rangliste spricht ComputerBase bereits seit vier Jahren monatlich CPU- und GPU-Kaufempfehlungen aus. Ab sofort gibt es auch eine Kaufberatung für Arbeitsspeicher. Deren Pflege verantwortet die Community.",
         )
 
-        embed.set_image(url="https://i.imgur.com/jC0K8W8.png")
-        embed.set_thumbnail(url="https://i.imgur.com/jb4sJxq.png")
+        embed.set_image(url="https://i.imgur.com/pOsPkxk.png")
+        embed.set_thumbnail(url="https://i.imgur.com/Iml7Mgn.png")
         embed.set_author(
-            name="Verangry",
-            url="https://www.computerbase.de/forum/members/verangry.798158/",
-            icon_url="https://i.imgur.com/mu0em6U.png",
+            name="SV3N",
+            url="https://www.computerbase.de/forum/members/sv3n.774722/",
+            icon_url="https://i.imgur.com/cjo3SMD.png",
         )
         embed.set_footer(text="Channel: <#612647199737774104>")
         await ctx.send(embed=embed)
@@ -161,22 +161,22 @@ class spd(commands.Cog):
 
     @commands.command()
     async def spd(self, ctx):
-        """Link zu dem Community CPU und Bios Guide"""
+        """Link zur HARDWARELUXX SPD Datenbank"""
         embed = discord.Embed(
-            title="CPU und Bios Guide für Ryzen 3000 (und älter)",
+            title="Hardwareluxx SPD Datenbank",
             colour=0xE74C3C,
-            url="https://www.computerbase.de/forum/threads/cpu-und-bios-guide-fuer-ryzen-3000-und-aelter.1911429/",
-            description="Erklärungen sowie Tipps um das beste aus der CPU rauszuholen",
+            url="https://www.hardwareluxx.de/community/threads/hardwareluxx-spd-datenbank-anleitung-zum-ic-auslesen-v3-update-14-02-20.1073628/",
+            description="Sammelthread auf Hardwareluxx für SPD Daten von DDR1 bis DDR4 inkl. Anleitung zum Auslesen der Daten.",
         )
 
-        embed.set_image(url="https://i.imgur.com/jC0K8W8.png")
-        embed.set_thumbnail(url="https://i.imgur.com/jb4sJxq.png")
+        embed.set_image(url="https://i.imgur.com/OgacaAo.png")
+        embed.set_thumbnail(url="https://i.imgur.com/yYBXwTP.png")
         embed.set_author(
-            name="Verangry",
-            url="https://www.computerbase.de/forum/members/verangry.798158/",
-            icon_url="https://i.imgur.com/mu0em6U.png",
+            name="emissary42",
+            url="https://www.hardwareluxx.de/community/members/emissary42.38573/",
+            icon_url="https://i.imgur.com/DcfAykw.png",
         )
-        embed.set_footer(text="Channel: <#612647199737774104>")
+        embed.set_footer(text="Channel: <#545701084409233438>")
         await ctx.send(embed=embed)
 
 

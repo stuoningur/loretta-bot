@@ -103,5 +103,5 @@ class google_search(commands.Cog):
 def setup(bot):
     bot.add_cog(magic_ball(bot))
     bot.add_cog(why(bot))
-    bot.add_cog(google_search(bot))
     bot.add_cog(gif(bot))
+    bot.add_cog(google_search(bot))
