@@ -23,7 +23,7 @@ bot.load_extension("cogs.admin_tools")
 bot.load_extension("cogs.fun")
 bot.load_extension("cogs.guides")
 bot.load_extension("cogs.utilities")
-# bot.load_extension("cogs.specs")
+bot.load_extension("cogs.specs")
 
 
 @bot.event
