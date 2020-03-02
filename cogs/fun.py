@@ -6,9 +6,10 @@ import requests
 from discord.ext import commands
 
 
-class magic_ball(commands.Cog):
+class Fun(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
+        self.tenor_api = self.bot.tenor
 
     @commands.command(name="8ball", aliases=["magicball"])
     async def magic_ball(self, ctx, *, arg):
@@ -37,11 +38,6 @@ class magic_ball(commands.Cog):
         ]
         await ctx.send(f"Frage: {arg}\nAntwort: {random.choice(responses)}")
 
-
-class why(commands.Cog):
-    def __init__(self, bot):
-        self.bot = bot
-
     @commands.command(aliases=["warum"])
     async def why(self, ctx):
         """Erklärt den Namen des Bots"""
@@ -60,12 +56,6 @@ class why(commands.Cog):
             icon_url="https://i.imgur.com/1l78cyO.jpg",
         )
         await ctx.send(embed=embed)
-
-
-class gif(commands.Cog):
-    def __init__(self, bot):
-        self.bot = bot
-        self.tenor_api = self.bot.tenor
 
     @commands.command(aliases=["gifs"])
     async def gif(self, ctx, *, arg):
@@ -87,11 +77,6 @@ class gif(commands.Cog):
         else:
             return
 
-
-class google_search(commands.Cog):
-    def __init__(self, bot):
-        self.bot = bot
-
     @commands.command(name="igfd", aliases=["google"])
     async def google_search(self, ctx, *, arg=None):
         """Erstellt einen IGFD Link"""
@@ -101,7 +86,4 @@ class google_search(commands.Cog):
 
 
 def setup(bot):
-    bot.add_cog(magic_ball(bot))
-    bot.add_cog(why(bot))
-    bot.add_cog(gif(bot))
-    bot.add_cog(google_search(bot))
+    bot.add_cog(Fun(bot))

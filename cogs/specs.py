@@ -1,11 +1,16 @@
+import datetime
+
 import aiosqlite
 import discord
 from discord.ext import commands
 
 DB = "userspecs.sqlite3"
 
+today = datetime.datetime.now()
+time = today.strftime("%d.%m.%Y %H:%M:%S")
 
-class specs(commands.Cog):
+
+class Specs(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
@@ -40,6 +45,15 @@ class specs(commands.Cog):
                         colour=0xE74C3C,
                         description=result[1],
                     )
+                    if result[2] is not None:
+                        embed.add_field(
+                            name="Zuletzt Aktualisiert:", value=f"{result[2]}"
+                        )
+                    else:
+                        embed.add_field(
+                            name="Zuletzt Aktualisiert:",
+                            value="Wert konnte nicht gefunden werden.",
+                        )
                     embed.set_footer(
                         text=f"Angefordert von {ctx.message.author.name}",
                         icon_url=ctx.message.author.avatar_url,
@@ -80,6 +94,34 @@ class specs(commands.Cog):
     async def specs_show(self, ctx, user=None):
         await ctx.invoke(self.specs_command, user)
 
+    @specs_command.command(name="set")
+    async def specs_set(self, ctx, *, arg=None):
+        user = (str(ctx.message.author.id),)
+        async with aiosqlite.connect(DB) as db:
+            async with db.execute(
+                """SELECT userid FROM user_specs WHERE userid = ?""", user,
+            ) as cursor:
+                result = await cursor.fetchone()
+                if result is not None:
+                    user = str(ctx.message.author.id)
+                    update_specs = (str(arg), time, user)
+                    await db.execute(
+                        """UPDATE user_specs SET specs=?, timestamp=? WHERE userid=?""",
+                        update_specs,
+                    )
+                    await db.commit()
+                else:
+                    user = str(ctx.message.author.id)
+                    insert_specs = (user, str(arg), time)
+                    await db.execute(
+                        """INSERT INTO user_specs VALUES (?,?,?)""", insert_specs,
+                    )
+                    await db.commit()
+
+    @specs_command.command(name="delete")
+    async def specs_delete(self, ctx):
+        pass
+
 
 def setup(bot):
-    bot.add_cog(specs(bot))
+    bot.add_cog(Specs(bot))

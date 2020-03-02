@@ -2,7 +2,7 @@ import discord
 from discord.ext import commands
 
 
-class bios(commands.Cog):
+class Guides(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
@@ -26,11 +26,6 @@ class bios(commands.Cog):
         embed.set_footer(text="Channel: <#578340164187979796>")
         await ctx.send(embed=embed)
 
-
-class cpu(commands.Cog):
-    def __init__(self, bot):
-        self.bot = bot
-
     @commands.command()
     async def cpu(self, ctx):
         """Link zu dem Community CPU und Bios Guide"""
@@ -50,11 +45,6 @@ class cpu(commands.Cog):
         )
         embed.set_footer(text="Channel: <#612647199737774104>")
         await ctx.send(embed=embed)
-
-
-class limit(commands.Cog):
-    def __init__(self, bot):
-        self.bot = bot
 
     @commands.command(aliases=["limits"])
     async def limit(self, ctx):
@@ -76,11 +66,6 @@ class limit(commands.Cog):
         embed.set_footer(text="Channel: <#506902038215655424>")
         await ctx.send(embed=embed)
 
-
-class mainboard(commands.Cog):
-    def __init__(self, bot):
-        self.bot = bot
-
     @commands.command(aliases=["mobo", "motherboard", "vrm"])
     async def mainboard(self, ctx):
         """Link zum Hardwareluxx AM4 VRM Thread"""
@@ -100,11 +85,6 @@ class mainboard(commands.Cog):
         )
         embed.set_footer(text="Channel: <#578340164187979796>")
         await ctx.send(embed=embed)
-
-
-class manual(commands.Cog):
-    def __init__(self, bot):
-        self.bot = bot
 
     @commands.command(aliases=["anleitung"])
     async def manual(self, ctx):
@@ -129,11 +109,6 @@ class manual(commands.Cog):
         embed.set_footer(text="Channel: <#590260218512932919>")
         await ctx.send(embed=embed)
 
-
-class ramkit(commands.Cog):
-    def __init__(self, bot):
-        self.bot = bot
-
     @commands.command(aliases=["ramkits", "ram"])
     async def ramkit(self, ctx):
         """Link zum Computerbase RAM-Empfehlungen Artikel"""
@@ -153,11 +128,6 @@ class ramkit(commands.Cog):
         )
         embed.set_footer(text="Channel: <#612647199737774104>")
         await ctx.send(embed=embed)
-
-
-class spd(commands.Cog):
-    def __init__(self, bot):
-        self.bot = bot
 
     @commands.command()
     async def spd(self, ctx):
@@ -181,10 +151,4 @@ class spd(commands.Cog):
 
 
 def setup(bot):
-    bot.add_cog(bios(bot))
-    bot.add_cog(cpu(bot))
-    bot.add_cog(limit(bot))
-    bot.add_cog(mainboard(bot))
-    bot.add_cog(manual(bot))
-    bot.add_cog(ramkit(bot))
-    bot.add_cog(spd(bot))
+    bot.add_cog(Guides(bot))
