@@ -13,7 +13,7 @@ class Guides(commands.Cog):
             title="Ultimative AM4 UEFI/BIOS/AGESA Übersicht",
             colour=0xE74C3C,
             url="https://www.hardwareluxx.de/community/threads/ultimative-am4-uefi-bios-agesa-%C3%9Cbersicht-17-02-19.1228903/",
-            description="Anbei findet ihr eine UEFI/BIOS Übersicht mit den jeweils aktuellsten Versionen, sortiert nach aktuellem AGESA Stand. Sollte mal eine Version fehlen oder ihr einen Fehler findet, dann dürft ihr das hier gerne mitteilen.",
+            description="Anbei findet ihr eine UEFI/BIOS Übersicht mit den jeweils aktuellsten Versionen, sortiert nach aktuellem AGESA Stand. Sollte mal eine Version fehlen oder ihr einen Fehler findet, dann dürft ihr das hier gerne mitteilen.\n\nChannel: <#578340164187979796>",
         )
 
         embed.set_image(url="https://i.imgur.com/ytFxJ9B.png")
@@ -23,7 +23,6 @@ class Guides(commands.Cog):
             url="https://www.hardwareluxx.de/community/members/reous.55847/",
             icon_url="https://i.imgur.com/ArBeYmq.png",
         )
-        embed.set_footer(text="Channel: <#578340164187979796>")
         await ctx.send(embed=embed)
 
     @commands.command()
@@ -33,7 +32,7 @@ class Guides(commands.Cog):
             title="CPU und Bios Guide für Ryzen 3000 (und älter)",
             colour=0xE74C3C,
             url="https://www.computerbase.de/forum/threads/cpu-und-bios-guide-fuer-ryzen-3000-und-aelter.1911429/",
-            description="Erklärungen und Tipps um das beste aus einer AMD Ryzen CPU rauszuholen.",
+            description="Erklärungen und Tipps um das beste aus einer AMD Ryzen CPU rauszuholen.\n\nChannel: <#612647199737774104>",
         )
 
         embed.set_image(url="https://i.imgur.com/jC0K8W8.png")
@@ -43,7 +42,6 @@ class Guides(commands.Cog):
             url="https://www.computerbase.de/forum/members/verangry.798158/",
             icon_url="https://i.imgur.com/mu0em6U.png",
         )
-        embed.set_footer(text="Channel: <#612647199737774104>")
         await ctx.send(embed=embed)
 
     @commands.command(aliases=["limits"])
@@ -53,7 +51,7 @@ class Guides(commands.Cog):
             title="Ryzen RAM OC Thread + Mögliche Limitierungen",
             colour=0xE74C3C,
             url="https://www.hardwareluxx.de/community/threads/ryzen-ram-oc-thread-m%C3%B6gliche-limitierungen.1216557/",
-            description="In diesem Thread werde ich Informationen zum Thema RAM OC Allgemein sammeln, sowie nennenswerte Anleitungen oder Threads verlinken. Habt ihr Fragen zum Thema RAM OC oder braucht Hilfe euren RAM zu übertakten, dann seid ihr hier im richtigen Thread. Zögert nicht zu fragen, wir helfen gerne weiter.",
+            description="In diesem Thread werde ich Informationen zum Thema RAM OC Allgemein sammeln, sowie nennenswerte Anleitungen oder Threads verlinken. Habt ihr Fragen zum Thema RAM OC oder braucht Hilfe euren RAM zu übertakten, dann seid ihr hier im richtigen Thread. Zögert nicht zu fragen, wir helfen gerne weiter.\n\nChannel: <#506902038215655424>",
         )
 
         embed.set_image(url="https://i.imgur.com/isFPomg.png")
@@ -63,7 +61,6 @@ class Guides(commands.Cog):
             url="https://www.hardwareluxx.de/community/members/reous.55847/",
             icon_url="https://i.imgur.com/ArBeYmq.png",
         )
-        embed.set_footer(text="Channel: <#506902038215655424>")
         await ctx.send(embed=embed)
 
     @commands.command(aliases=["mobo", "motherboard", "vrm"])
@@ -73,7 +70,7 @@ class Guides(commands.Cog):
             title="AMD 3rd Gen AM4 Mainboards & VRM Liste (X570, P560, B550, A520, A420)",
             colour=0xE74C3C,
             url="https://www.hardwareluxx.de/community/threads/amd-3rd-gen-am4-mainboards-vrm-liste-x570-p560-b550-a520-a420.1228904/",
-            description="Hier dürfen News und Produkte diskutieret, Informationen erfragt und zusammengetragen, technische Fragen gestellt und schließlich auch Erfahrungen mit dem eigenen System ausgetauscht werden. Der Umfang des Threads hängt von eurer Beteiligung ab und eure Unterstützung beim Sammeln von Informationen zur Vervollständigung der Übersicht ist ausdrücklich erbeten.",
+            description="Hier dürfen News und Produkte diskutieret, Informationen erfragt und zusammengetragen, technische Fragen gestellt und schließlich auch Erfahrungen mit dem eigenen System ausgetauscht werden. Der Umfang des Threads hängt von eurer Beteiligung ab und eure Unterstützung beim Sammeln von Informationen zur Vervollständigung der Übersicht ist ausdrücklich erbeten.\n\nChannel: <#578340164187979796>",
         )
 
         embed.set_image(url="https://i.imgur.com/owYHwzW.jpg")
@@ -83,7 +80,6 @@ class Guides(commands.Cog):
             url="https://www.hardwareluxx.de/community/members/emissary42.38573/",
             icon_url="https://i.imgur.com/DcfAykw.png",
         )
-        embed.set_footer(text="Channel: <#578340164187979796>")
         await ctx.send(embed=embed)
 
     @commands.command(aliases=["anleitung"])
@@ -97,7 +93,7 @@ class Guides(commands.Cog):
         )
         embed.add_field(
             name="Download",
-            value="[Link zur Zen2 PDF Anleitung - Version 2.10 (29.09.2019)](https://cdn.discordapp.com/attachments/506901533821239317/627968448500072448/RAM_OC_Anleitung_Vers_2_10.pdf)\n\n[Link zur Zen1/Zen+ PDF Anleitung - Version 1.30 (11.04.2019)](https://drive.google.com/open?id=1NQcR5ZiBnI-vENU-XSnQvvB3JzmGn2Ze)",
+            value="[Link zur Zen2 PDF Anleitung - Version 2.10 (29.09.2019)](https://cdn.discordapp.com/attachments/506901533821239317/627968448500072448/RAM_OC_Anleitung_Vers_2_10.pdf)\n\n[Link zur Zen1/Zen+ PDF Anleitung - Version 1.30 (11.04.2019)](https://drive.google.com/open?id=1NQcR5ZiBnI-vENU-XSnQvvB3JzmGn2Ze)\n\nChannel: <#590260218512932919>",
         )
         embed.set_image(url="https://i.imgur.com/4hCP34S.png")
         embed.set_thumbnail(url="https://i.imgur.com/W83EAab.png")
@@ -106,7 +102,6 @@ class Guides(commands.Cog):
             url="https://www.computerbase.de/forum/members/cm87.771841/",
             icon_url="https://i.imgur.com/Fci12gO.png",
         )
-        embed.set_footer(text="Channel: <#590260218512932919>")
         await ctx.send(embed=embed)
 
     @commands.command(aliases=["ramkits", "ram"])
@@ -116,7 +111,7 @@ class Guides(commands.Cog):
             title="Aus der Community: RAM-Empfehlungen für AMD Ryzen und Intel Core",
             colour=0xE74C3C,
             url="https://www.computerbase.de/thema/ram/rangliste/",
-            description="In der Prozessor- und der Grafikkarten-Rangliste spricht ComputerBase bereits seit vier Jahren monatlich CPU- und GPU-Kaufempfehlungen aus. Ab sofort gibt es auch eine Kaufberatung für Arbeitsspeicher. Deren Pflege verantwortet die Community.",
+            description="In der Prozessor- und der Grafikkarten-Rangliste spricht ComputerBase bereits seit vier Jahren monatlich CPU- und GPU-Kaufempfehlungen aus. Ab sofort gibt es auch eine Kaufberatung für Arbeitsspeicher. Deren Pflege verantwortet die Community.\n\nChannel: <#612647199737774104>",
         )
 
         embed.set_image(url="https://i.imgur.com/pOsPkxk.png")
@@ -126,7 +121,6 @@ class Guides(commands.Cog):
             url="https://www.computerbase.de/forum/members/sv3n.774722/",
             icon_url="https://i.imgur.com/cjo3SMD.png",
         )
-        embed.set_footer(text="Channel: <#612647199737774104>")
         await ctx.send(embed=embed)
 
     @commands.command()
@@ -136,7 +130,7 @@ class Guides(commands.Cog):
             title="Hardwareluxx SPD Datenbank",
             colour=0xE74C3C,
             url="https://www.hardwareluxx.de/community/threads/hardwareluxx-spd-datenbank-anleitung-zum-ic-auslesen-v3-update-14-02-20.1073628/",
-            description="Sammelthread auf Hardwareluxx für SPD Daten von DDR1 bis DDR4 inkl. Anleitung zum Auslesen der Daten.",
+            description="Sammelthread auf Hardwareluxx für SPD Daten von DDR1 bis DDR4 inkl. Anleitung zum Auslesen der Daten.\n\nChannel: <#545701084409233438>",
         )
 
         embed.set_image(url="https://i.imgur.com/OgacaAo.png")
@@ -146,7 +140,6 @@ class Guides(commands.Cog):
             url="https://www.hardwareluxx.de/community/members/emissary42.38573/",
             icon_url="https://i.imgur.com/DcfAykw.png",
         )
-        embed.set_footer(text="Channel: <#545701084409233438>")
         await ctx.send(embed=embed)
 
 

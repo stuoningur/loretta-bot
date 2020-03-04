@@ -11,7 +11,7 @@ class Fun(commands.Cog):
         self.bot = bot
         self.tenor_api = self.bot.tenor
 
-    @commands.command(name="8ball", aliases=["magicball"])
+    @commands.command(name="8ball", aliases=["magicball", "loretta"])
     async def magic_ball(self, ctx, *, arg):
         """Gibt eine Magic 8 Ball Antwort auf eine Frage"""
         responses = [
