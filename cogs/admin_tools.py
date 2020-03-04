@@ -25,11 +25,11 @@ class AdminTools(commands.Cog):
         """Bannt einen User"""
         await member.ban(reason=reason)
 
-    @commands.command()
-    @commands.has_permissions(ban_members=True)
-    async def unban(self, ctx, member: discord.Member, *, reason=None):
-        """Entfernt einen Ban von einem User"""
-        await member.unban(reason=reason)
+    # @commands.command()
+    # @commands.has_permissions(ban_members=True)
+    # async def unban(self, ctx, member: discord.Member, *, reason=None):
+    #     """Entfernt einen Ban von einem User"""
+    #     await member.unban(reason=reason)
 
     @commands.command()
     @commands.has_permissions(kick_members=True)

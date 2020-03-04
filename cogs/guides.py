@@ -93,11 +93,11 @@ class Guides(commands.Cog):
             title="RAM OC Anleitung",
             colour=0xE74C3C,
             url="https://www.computerbase.de/forum/threads/amd-ryzen-ram-oc-community.1829356/",
-            description="Version 2.01 (29.09.2019)\n\nWir versuchen nicht nur höhere RAM-Taktstufen zu erreichen, sondern auch die dazugehörigen Haupt- & Subtimings auf das System abgestimmt zu optimieren.",
+            description="Wir versuchen nicht nur höhere RAM-Taktstufen zu erreichen, sondern auch die dazugehörigen Haupt- & Subtimings auf das System abgestimmt zu optimieren.",
         )
         embed.add_field(
             name="Download",
-            value="[Link zur PDF Anleitung](https://cdn.discordapp.com/attachments/506901533821239317/627968448500072448/RAM_OC_Anleitung_Vers_2_10.pdf)",
+            value="[Link zur Zen2 PDF Anleitung - Version 2.10 (29.09.2019)](https://cdn.discordapp.com/attachments/506901533821239317/627968448500072448/RAM_OC_Anleitung_Vers_2_10.pdf)\n\n[Link zur Zen1/Zen+ PDF Anleitung - Version 1.30 (11.04.2019)](https://drive.google.com/open?id=1NQcR5ZiBnI-vENU-XSnQvvB3JzmGn2Ze)",
         )
         embed.set_image(url="https://i.imgur.com/4hCP34S.png")
         embed.set_thumbnail(url="https://i.imgur.com/W83EAab.png")
