@@ -15,8 +15,9 @@ class Specs(commands.Cog):
     async def specs_command(self, ctx, user=None):
         if user is None:
             user = (ctx.message.author.id,)
-        elif "@!" in user:
-            user = (int(user[3:-1]),)
+        elif "@" in user:
+            res = "".join(filter(lambda i: i.isdigit(), user))
+            user = (int(res),)
         else:
             matches = [
                 member

@@ -37,7 +37,7 @@ class Help(commands.Cog):
         embed = discord.Embed(colour=0xE74C3C,)
         embed.add_field(
             name="**Spezifikationen festlegen:**",
-            value="Um deine Spezifikationen bei Loretta zu registrieren, nutze den `!specs set` Befehl gefolgt von deiner Hardware.\nEs wird [Discords Markdown](https://support.discordapp.com/hc/de/articles/210298617) unterstützt, Zeilenumbrücke sind mit Umschalt+Enter möglich.\n**Beispiel**:\n```!specs set\n**CPU:** AMD Ryzen 11 9999X\n**Mainboard:** ASUS ROG Crosshair VIIII Extreme\n**RAM:** 32GB Crucial Ballistix DDR7 @ 9000 CL6```",
+            value="Um deine Spezifikationen bei Loretta zu registrieren, nutze den `!specs set` Befehl gefolgt von deiner Hardware.\nEs wird [Discords Markdown](https://support.discordapp.com/hc/de/articles/210298617) unterstützt, Zeilenumbrüche sind mit Umschalt+Enter möglich.\n**Beispiel**:\n```!specs set\n**CPU:** AMD Ryzen 11 9999X\n**Mainboard:** ASUS ROG Crosshair VIIII Extreme\n**RAM:** 32GB Crucial Ballistix DDR7 @ 9000 CL6```",
             inline="false",
         )
         embed.add_field(

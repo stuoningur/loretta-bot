@@ -19,6 +19,8 @@ class ErrorHandling(commands.Cog):
             await ctx.send("Du hast nicht die benötigten Rechte.")
         elif isinstance(error, commands.BotMissingPermissions):
             await ctx.send("Ich darf das leider nicht.")
+        else:
+            print(error)
 
 
 def setup(bot):
