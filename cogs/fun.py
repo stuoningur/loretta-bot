@@ -62,7 +62,7 @@ class Fun(commands.Cog):
         """Sucht die Top 10 gifs für das Argument und gibt ein Ergebnis zufällig wieder"""
         lmt = 10
         api_request = requests.get(
-            f"https://api.tenor.com/v1/search?q={arg}&key={self.tenor_api}&limit={lmt}"
+            f"https://api.tenor.com/v1/search?q={arg}&key={self.tenor_api}&limit={lmt}&contentfilter=low"
         )
 
         gifs = []
