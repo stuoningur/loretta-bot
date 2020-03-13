@@ -12,7 +12,7 @@ class Specs(commands.Cog):
         self.bot = bot
 
     @commands.group(name="specs", aliases=["s"], invoke_without_command=True)
-    async def specs_command(self, ctx, user=None):
+    async def specs_command(self, ctx, *, user=None):
         if user is None:
             user = (ctx.message.author.id,)
         elif "@" in user:
@@ -22,7 +22,7 @@ class Specs(commands.Cog):
             matches = [
                 member
                 for member in ctx.guild.members
-                if user.lower() in member.name.lower()
+                if user.lower() in member.display_name.lower()
             ]
             if len(matches) == 0:
                 await ctx.send("Das Servermitglied konnte nicht gefunden werden.")
@@ -56,7 +56,7 @@ class Specs(commands.Cog):
                                 value="Wert konnte nicht gefunden werden.",
                             )
                         embed.set_footer(
-                            text=f"Angefordert von {ctx.message.author.name}",
+                            text=f"Angefordert von {ctx.message.author.display_name}",
                             icon_url=ctx.message.author.avatar_url,
                         )
                         await ctx.send(embed=embed)
@@ -66,7 +66,7 @@ class Specs(commands.Cog):
                         )
 
     @specs_command.command(name="search")
-    async def specs_search(self, ctx, arg: str = None):
+    async def specs_search(self, ctx, *, arg: str = None):
         search_result = []
         search_term = (f"%{arg}%",)
         async with aiosqlite.connect(DB) as db:
@@ -90,7 +90,7 @@ class Specs(commands.Cog):
                 description="\n".join(guild_members),
             )
             embed.set_footer(
-                text=f"Angefordert von {ctx.message.author.name}",
+                text=f"Angefordert von {ctx.message.author.display_name}",
                 icon_url=ctx.message.author.avatar_url,
             )
             await ctx.send(embed=embed)
