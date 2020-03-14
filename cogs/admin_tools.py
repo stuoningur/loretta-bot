@@ -20,6 +20,16 @@ class AdminTools(commands.Cog):
         await ctx.channel.purge(limit=amount + 1)
 
     @commands.command()
+    @commands.has_permissions(manage_messages=True)
+    async def nonpics(self, ctx, amount=0):
+        def has_attachement(m):
+            if not len(m.attachments) > 0:
+                return True
+
+        """Löscht die angegebene Anzahl an Nachrichten wenn sie keine Bilder enthalten"""
+        await ctx.channel.purge(limit=amount + 1, check=has_attachement, bulk=False)
+
+    @commands.command()
     @commands.has_permissions(ban_members=True)
     async def ban(self, ctx, member: discord.Member, *, reason=None):
         """Bannt einen User"""
