@@ -96,8 +96,8 @@ class Specs(commands.Cog):
             await ctx.send(embed=embed)
 
     @specs_command.command(name="show")
-    async def specs_show(self, ctx, user=None):
-        await ctx.invoke(self.specs_command, user)
+    async def specs_show(self, ctx, *, user=None):
+        await ctx.invoke(self.specs_command, user=user)
 
     @specs_command.command(name="set")
     async def specs_set(self, ctx, *, arg: str = None):
