@@ -63,6 +63,25 @@ class Guides(commands.Cog):
         )
         await ctx.send(embed=embed)
 
+    @commands.command(aliases=["list", "ergebnisse"])
+    async def liste(self, ctx):
+        """Link zum OC Ergebnisse Google Sheet"""
+        embed = discord.Embed(
+            title="RAM OC Ergebnisse - Google Sheet",
+            colour=0xE74C3C,
+            url="https://docs.google.com/spreadsheets/d/1HKPVfDcFO-aieAOXHFQZp15rwWadbPTVDNgO8vtyDCM",
+            description="Eine Sammlung an RAM OC Ergebnissen übersichtlich in einem Google Sheet dargestellt.\n\nChannel: <#590255495592542219>",
+        )
+
+        embed.set_image(url="https://i.imgur.com/14yKUIi.png")
+        embed.set_thumbnail(url="https://i.imgur.com/OE94LR0.png")
+        embed.set_author(
+            name="shaav - Philipp",
+            url="https://www.hardwareluxx.de/community/members/shaav.25323/",
+            icon_url="https://i.imgur.com/DB4ei4M.png",
+        )
+        await ctx.send(embed=embed)
+
     @commands.command(aliases=["mobo", "motherboard", "vrm"])
     async def mainboard(self, ctx):
         """Link zum Hardwareluxx AM4 VRM Thread"""

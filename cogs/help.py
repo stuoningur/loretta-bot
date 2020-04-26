@@ -11,7 +11,7 @@ class Help(commands.Cog):
         embed = discord.Embed(colour=0xE74C3C,)
         embed.add_field(
             name="**Lorettas Anleitungen:**",
-            value="```!bios        !cpu    !limit    !mainboard\n!anleitung   !ram    !spd```",
+            value="```!bios        !cpu    !limit    !mainboard\n!anleitung   !ram    !spd      !ergebnisse```",
             inline="false",
         )
         embed.add_field(
