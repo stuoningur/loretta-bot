@@ -1,3 +1,5 @@
+import datetime
+
 from discord.ext import commands
 
 
@@ -20,7 +22,9 @@ class ErrorHandling(commands.Cog):
         elif isinstance(error, commands.BotMissingPermissions):
             await ctx.send("Ich darf das leider nicht.")
         else:
-            print(error)
+            today = datetime.datetime.now()
+            time = today.strftime("%d.%m.%Y %H:%M:%S")
+            print(f"{time} - {error}")
 
 
 def setup(bot):

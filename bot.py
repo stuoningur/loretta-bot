@@ -1,4 +1,5 @@
 import os
+import datetime
 
 import discord
 from discord.ext import commands
@@ -32,7 +33,9 @@ bot.load_extension("cogs.error_handling")
 
 @bot.event
 async def on_ready():
-    print(f"Logged in as {bot.user}")
+    today = datetime.datetime.now()
+    time = today.strftime("%d.%m.%Y %H:%M:%S")
+    print(f"{time} - Logged in as {bot.user}")
 
 
 bot.run(bot_token)

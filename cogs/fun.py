@@ -84,6 +84,13 @@ class Fun(commands.Cog):
         search_url = f"http://www.igfd.org/?q={arg}"
         await ctx.send(search_url)
 
+    @commands.command(name="geizhals", aliases=["gh"])
+    async def geizhals_search(self, ctx, *, arg=None):
+        """Erstellt einen Geizhals Such Link"""
+        arg = arg.split("\n")[0].replace(" ", "+")
+        search_url = f"https://geizhals.de/?fs={arg}"
+        await ctx.send(search_url)
+
 
 def setup(bot):
     bot.add_cog(Fun(bot))

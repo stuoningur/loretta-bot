@@ -16,7 +16,7 @@ class Help(commands.Cog):
         )
         embed.add_field(
             name="**Lorettas Witzebuch:**",
-            value="```!gif *suchbegriff*       !8ball *frage*\n!google *suchbegriff*    !warum```",
+            value="```!gif *suchbegriff*       !8ball *frage*    !gh *suchbegriff*\n!google *suchbegriff*    !warum```",
             inline="false",
         )
         embed.add_field(
