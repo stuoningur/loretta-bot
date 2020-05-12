@@ -15,6 +15,11 @@ class Help(commands.Cog):
             inline="false",
         )
         embed.add_field(
+            name="**Lorettas Timings Presets:**",
+            value="```!timings *hersteller* *ics* *takt* *preset*\n\nZum Beispiel:\n!timings samsung bdie 3733 scharf\n\nAktuell hinterlegte Presets:\nsamsung bdie:\n\t3600 (lasch&scharf)\n\t3733 (lasch&scharf)\n\t3800 (lasch&scharf)\nmicron edie:\n\t3600 (lasch)\n\t3733 (lasch&scharf)\n\t3800 (lasch&scharf)```",
+            inline="false",
+        )
+        embed.add_field(
             name="**Lorettas Witzebuch:**",
             value="```!gif *suchbegriff*       !8ball *frage*    !gh *suchbegriff*\n!google *suchbegriff*    !warum```",
             inline="false",

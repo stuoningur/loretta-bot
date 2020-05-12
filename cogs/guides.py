@@ -112,7 +112,13 @@ class Guides(commands.Cog):
         )
         embed.add_field(
             name="Download",
-            value="[Link zur Zen2 PDF Anleitung - Version 2.10 (29.09.2019)](https://cdn.discordapp.com/attachments/506901533821239317/627968448500072448/RAM_OC_Anleitung_Vers_2_10.pdf)\n\n[Link zur Zen1/Zen+ PDF Anleitung - Version 1.30 (11.04.2019)](https://drive.google.com/open?id=1NQcR5ZiBnI-vENU-XSnQvvB3JzmGn2Ze)\n\nChannel: <#590260218512932919>",
+            value="[Link zur Zen2 PDF Anleitung - Version 2.10 (29.09.2019)](https://cdn.discordapp.com/attachments/506901533821239317/627968448500072448/RAM_OC_Anleitung_Vers_2_10.pdf)\n\n[Link zur Zen1/Zen+ PDF Anleitung - Version 1.30 (11.04.2019)](https://drive.google.com/open?id=1NQcR5ZiBnI-vENU-XSnQvvB3JzmGn2Ze)",
+            inline="false",
+        )
+        embed.add_field(
+            name="Wichtige RAM Timings",
+            value="[RAM Timings und deren Einfluss auf Spiele und Anwendungen](https://www.hardwareluxx.de/community/threads/ram-timings-und-deren-einfluss-auf-spiele-und-anwendungen-amd.1269156/#5.0)\n\nChannel: <#590260218512932919>",
+            inline="false",
         )
         embed.set_image(url="https://i.imgur.com/4hCP34S.png")
         embed.set_thumbnail(url="https://i.imgur.com/W83EAab.png")

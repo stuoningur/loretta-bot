@@ -29,6 +29,7 @@ bot.load_extension("cogs.utilities")
 bot.load_extension("cogs.specs")
 bot.load_extension("cogs.help")
 bot.load_extension("cogs.error_handling")
+bot.load_extension("cogs.timings")
 
 
 @bot.event
