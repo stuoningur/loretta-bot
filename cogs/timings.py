@@ -32,7 +32,7 @@ samsung_b_die_3800_lasch_rtts = (
 )
 
 samsung_b_die_3800_scharf_spannung = "```VDIMM       1,45 - 1,50\nVDDG        0,95 - 1,05 (IOD & CCD)\nCLDO VDDP   855 - 1050\n```"
-samsung_b_die_3800_scharf_timings = "```tCL        14          tWRWRSCL     4\ntRCDRD     15 (16)     tRFC       266\ntRCDWR     14          tCWL        14\ntRP        14          tRTP        12\ntRAS       28          tRDWR        8\ntRC        38 (42)     tWRRD        2\ntRRDS       4          tWRWRSC      1\ntRRDL       6          tWRWRSD      7\ntFAW       16          tWRWRDD      7\ntWTRS       4          tRDRDSC      1\ntWTRL       8          tRDRDSD      5\ntWR        14          tRDRDDD      5\ntRDRDSCL    4          tCKE         1\n```"
+samsung_b_die_3800_scharf_timings = "```tCL        14          tWRWRSCL     4\ntRCDRD     15 (16)     tRFC       266\ntRCDWR     14          tCWL        14\ntRP        14          tRTP        12\ntRAS       28          tRDWR        8\ntRC        38 (42)     tWRRD        2 (4)\ntRRDS       4          tWRWRSC      1\ntRRDL       6          tWRWRSD      7\ntFAW       16          tWRWRDD      7\ntWTRS       4          tRDRDSC      1\ntWTRL       8          tRDRDSD      5\ntWR        14          tRDRDDD      5\ntRDRDSCL    4          tCKE         1\n```"
 samsung_b_die_3800_scharf_rtts = (
     "```2x8GB    0/0/5\n2x16GB   0/3/1\n4x8GB    7/3/1\n4x16GB   7/3/1```"
 )
@@ -85,6 +85,9 @@ class Timings(commands.Cog):
         memclk: int = None,
         preset: str = None,
     ):
+        vendor = vendor.lower()
+        ics = ics.lower()
+        preset = preset.lower()
         if vendor is None or ics is None or memclk is None or preset is None:
             await ctx.send("Es fehlt ein oder mehrere Argumente")
         else:

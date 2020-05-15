@@ -91,6 +91,13 @@ class Fun(commands.Cog):
         search_url = f"https://geizhals.de/?fs={arg}"
         await ctx.send(search_url)
 
+    @commands.command(name="duden", aliases=["d"])
+    async def duden_search(self, ctx, arg=None):
+        """Erstellt einen Duden Such Link"""
+        # arg = arg.split("\n")[0].replace(" ", "+")
+        search_url = f"https://www.duden.de/suchen/dudenonline/{arg}"
+        await ctx.send(search_url)
+
 
 def setup(bot):
     bot.add_cog(Fun(bot))
