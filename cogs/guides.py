@@ -116,7 +116,7 @@ class Guides(commands.Cog):
             inline="false",
         )
         embed.add_field(
-            name="Wichtige RAM Timings",
+            name="Wichtige RAM Timings von Reous",
             value="[RAM Timings und deren Einfluss auf Spiele und Anwendungen](https://www.hardwareluxx.de/community/threads/ram-timings-und-deren-einfluss-auf-spiele-und-anwendungen-amd.1269156/#5.0)\n\nChannel: <#590260218512932919>",
             inline="false",
         )
