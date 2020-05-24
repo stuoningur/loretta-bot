@@ -39,6 +39,12 @@ samsung_b_die_3800_scharf_rtts = (
 
 samsung_b_die_cads = "```24/20/20/24\n24/20/24/24\n24/24/24/24\n60/20/24/24```"
 
+samsung_c_die_3600_lasch_spannung = "```VDIMM       1,28 - 1,33```"
+samsung_c_die_3600_lasch_timings = "```tCL        18   tWRWRSCL     4\ntRCDRD     22   tRFC       560\ntRCDWR     22   tCWL        18\ntRP        22   tRTP        12\ntRAS       45   tRDWR       12\ntRC        65   tWRRD        4\ntRRDS       6   tWRWRSC      1\ntRRDL      10   tWRWRSD      7\ntFAW       36   tWRWRDD      7\ntWTRS       4   tRDRDSC      1\ntWTRL      12   tRDRDSD      5\ntWR        24   tRDRDDD      5\ntRDRDSCL    4   tCKE         1\n```"
+samsung_c_die_3600_lasch_rtts = "```TBD```"
+
+samsung_c_die_cads = "```TBD```"
+
 micron_e_die_3600_lasch_spannung = "```VDIMM       1,35 - 1,37\n```"
 micron_e_die_3600_lasch_timings = "```tCL        16   tWRWRSCL     4\ntRCDRD     19   tRFC       570\ntRCDWR     16   tCWL        16\ntRP        16   tRTP        12\ntRAS       40   tRDWR       10\ntRC        65   tWRRD        4\ntRRDS       4   tWRWRSC      1\ntRRDL       7   tWRWRSD      7\ntFAW       24   tWRWRDD      7\ntWTRS       4   tRDRDSC      1\ntWTRL      12   tRDRDSD      5\ntWR        24   tRDRDDD      5\ntRDRDSCL    4   tCKE         1\n```"
 micron_e_die_3600_lasch_rtts = (
@@ -70,6 +76,11 @@ micron_e_die_3800_scharf_rtts = (
 )
 
 micron_e_die_cads = "```24/24/24/24```"
+
+hynix_cjr_3600_spannung = "```VDIMM       1,35 - 1,37```"
+hynix_cjr_3600_timings = "```tCL        16   tWRWRSCL     4\ntRCDRD     18   tRFC       480\ntRCDWR     16   tCWL        16\ntRP        19   tRTP        12\ntRAS       38   tRDWR        9\ntRC        58   tWRRD        2\ntRRDS       6   tWRWRSC      1\ntRRDL       9   tWRWRSD      7\ntFAW       36   tWRWRDD      7\ntWTRS       4   tRDRDSC      1\ntWTRL      12   tRDRDSD      5\ntWR        12   tRDRDDD      5\ntRDRDSCL    4   tCKE         1\n```"
+hynix_cjr_3600_rtts = "```TBD```"
+hynix_cjr_cads = "```TBD```"
 
 
 class Timings(commands.Cog):
@@ -153,6 +164,25 @@ class Timings(commands.Cog):
                             "Es konnten keine Daten für den angegebenen RAM Takt gefunden werden."
                         )
                         return
+                elif ics == "cdie":
+                    cads = samsung_c_die_cads
+                    if memclk == 3600:
+                        if preset == "lasch":
+                            title = "**Samsung C-Die 3600 Lasche Timings**"
+                            clk = "```MEMCLK          3600       FCLK           1800\nPowerDownMode   Disabled   GearDownMode   Enabled  ```"
+                            spannung = samsung_c_die_3600_lasch_spannung
+                            timings = samsung_c_die_3600_lasch_timings
+                            rtts = samsung_c_die_3600_lasch_rtts
+                        else:
+                            await ctx.send(
+                                "Es konnte keine Daten für das angegebene Preset gefunden werden."
+                            )
+                            return
+                    else:
+                        await ctx.send(
+                            "Es konnten keine Daten für den angegebenen RAM Takt gefunden werden."
+                        )
+                        return
                 else:
                     await ctx.send(
                         "Es konnten keine Daten für die angegebenen Speicher-ICs gefunden werden."
@@ -168,12 +198,6 @@ class Timings(commands.Cog):
                             spannung = micron_e_die_3600_lasch_spannung
                             timings = micron_e_die_3600_lasch_timings
                             rtts = micron_e_die_3600_lasch_rtts
-                        # elif preset == "scharf":
-                        #     title = "**Micron Rev. E 3600 Scharfe Timings**"
-                        #     clk = "```MEMCLK     3600      FCLK       1800```"
-                        #     spannung = samsung_b_die_3600_lasch_spannung
-                        #     timings = samsung_b_die_3600_lasch_timings
-                        #     rtts = samsung_b_die_3600_lasch_rtts
                         else:
                             await ctx.send(
                                 "Es konnte keine Daten für das angegebene Preset gefunden werden."
@@ -226,8 +250,25 @@ class Timings(commands.Cog):
                     )
                     return
             elif vendor == "hynix":
-                if ics == "nix":
-                    return
+                if ics == "cjr":
+                    cads = hynix_cjr_cads
+                    if memclk == 3600:
+                        if preset == "lasch":
+                            title = "**Hynix CJR 3600 Lasche Timings**"
+                            clk = "```MEMCLK          3600       FCLK           1800\nPowerDownMode   Disabled   GearDownMode   Enabled  ```"
+                            spannung = hynix_cjr_3600_spannung
+                            timings = hynix_cjr_3600_timings
+                            rtts = hynix_cjr_3600_rtts
+                        else:
+                            await ctx.send(
+                                "Es konnte keine Daten für das angegebene Preset gefunden werden."
+                            )
+                            return
+                    else:
+                        await ctx.send(
+                            "Es konnten keine Daten für den angegebenen RAM Takt gefunden werden."
+                        )
+                        return
                 else:
                     await ctx.send(
                         "Es konnten keine Daten für die angegebenen Speicher-ICs gefunden werden."

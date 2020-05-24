@@ -16,7 +16,7 @@ class Help(commands.Cog):
         )
         embed.add_field(
             name="**Lorettas Timings Presets:**",
-            value="```!timings *hersteller* *ics* *takt* *preset*\n\nZum Beispiel:\n!timings samsung bdie 3733 scharf\n\nAktuell hinterlegte Presets:\nsamsung bdie:\n\t3600 (lasch&scharf)\n\t3733 (lasch&scharf)\n\t3800 (lasch&scharf)\nmicron edie:\n\t3600 (lasch)\n\t3733 (lasch&scharf)\n\t3800 (lasch&scharf)```",
+            value="```!timings *hersteller* *ics* *takt* *preset*\n\nZum Beispiel:\n!timings samsung bdie 3733 scharf\n\nAktuell hinterlegte Presets:\nsamsung bdie:\n\t3600 (lasch&scharf)\n\t3733 (lasch&scharf)\n\t3800 (lasch&scharf)\nsamsung cdie:\n\t3600 (lasch)\nmicron edie:\n\t3600 (lasch)\n\t3733 (lasch&scharf)\n\t3800 (lasch&scharf)\nhynix cjr:\n\t3600 (lasch)```",
             inline="false",
         )
         embed.add_field(

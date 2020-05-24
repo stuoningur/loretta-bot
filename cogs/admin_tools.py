@@ -1,5 +1,4 @@
 from discord.ext import commands
-import discord
 
 
 class AdminTools(commands.Cog):
@@ -22,30 +21,13 @@ class AdminTools(commands.Cog):
     @commands.command()
     @commands.has_permissions(manage_messages=True)
     async def nonpics(self, ctx, amount=0):
+        """Löscht die angegebene Anzahl an Nachrichten wenn sie keine Bilder enthalten"""
+
         def has_attachement(m):
             if not len(m.attachments) > 0:
                 return True
 
-        """Löscht die angegebene Anzahl an Nachrichten wenn sie keine Bilder enthalten"""
         await ctx.channel.purge(limit=amount + 1, check=has_attachement, bulk=False)
-
-    @commands.command()
-    @commands.has_permissions(ban_members=True)
-    async def ban(self, ctx, member: discord.Member, *, reason=None):
-        """Bannt einen User"""
-        await member.ban(reason=reason)
-
-    # @commands.command()
-    # @commands.has_permissions(ban_members=True)
-    # async def unban(self, ctx, member: discord.Member, *, reason=None):
-    #     """Entfernt einen Ban von einem User"""
-    #     await member.unban(reason=reason)
-
-    @commands.command()
-    @commands.has_permissions(kick_members=True)
-    async def kick(self, ctx, member: discord.Member, *, reason=None):
-        """Kickt einen User"""
-        await member.kick(reason=reason)
 
     @commands.command()
     @commands.is_owner()
