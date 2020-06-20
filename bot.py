@@ -1,5 +1,5 @@
-import os
 import datetime
+from os import environ
 
 import discord
 from discord.ext import commands
@@ -7,9 +7,9 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-bot_token = os.getenv("BOT_TOKEN")
-owner_id = int(os.getenv("OWNER_ID"))
-bot_activity = os.getenv("BOT_ACTIVITY")
+bot_token = environ.get("BOT_TOKEN")
+owner_id = int(environ.get("OWNER_ID"))
+bot_activity = environ.get("BOT_ACTIVITY")
 
 bot = commands.Bot(
     command_prefix=commands.when_mentioned_or("!"),
@@ -18,7 +18,7 @@ bot = commands.Bot(
     owner_id=owner_id,
 )
 
-bot.tenor = os.getenv("TENOR_API")
+bot.tenor = environ.get("TENOR_API")
 
 bot.remove_command("help")
 

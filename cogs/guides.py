@@ -148,7 +148,7 @@ class Guides(commands.Cog):
         )
         await ctx.send(embed=embed)
 
-    @commands.command()
+    @commands.command(aliases=["ics"])
     async def spd(self, ctx):
         """Link zur HARDWARELUXX SPD Datenbank"""
         embed = discord.Embed(
@@ -157,7 +157,11 @@ class Guides(commands.Cog):
             url="https://www.hardwareluxx.de/community/threads/hardwareluxx-spd-datenbank-anleitung-zum-ic-auslesen-v3-update-14-02-20.1073628/",
             description="Sammelthread auf Hardwareluxx für SPD Daten von DDR1 bis DDR4 inkl. Anleitung zum Auslesen der Daten.\n\nChannel: <#545701084409233438>",
         )
-
+        embed.add_field(
+            name="Siehe auch",
+            value="[Hersteller IC Versionnummern](https://i.imgur.com/sCc4l7l.png)",
+            inline="false",
+        )
         embed.set_image(url="https://i.imgur.com/OgacaAo.png")
         embed.set_thumbnail(url="https://i.imgur.com/yYBXwTP.png")
         embed.set_author(

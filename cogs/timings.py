@@ -47,35 +47,31 @@ samsung_c_die_cads = "```TBD```"
 
 micron_e_die_3600_lasch_spannung = "```VDIMM       1,35 - 1,37\n```"
 micron_e_die_3600_lasch_timings = "```tCL        16   tWRWRSCL     4\ntRCDRD     19   tRFC       570\ntRCDWR     16   tCWL        16\ntRP        16   tRTP        12\ntRAS       40   tRDWR       10\ntRC        65   tWRRD        4\ntRRDS       4   tWRWRSC      1\ntRRDL       7   tWRWRSD      7\ntFAW       24   tWRWRDD      7\ntWTRS       4   tRDRDSC      1\ntWTRL      12   tRDRDSD      5\ntWR        24   tRDRDDD      5\ntRDRDSCL    4   tCKE         1\n```"
-micron_e_die_3600_lasch_rtts = (
-    "```2x8GB    0/0/5\n2x16GB   0/3/1\n4x8GB    7/3/1\n4x16GB   7/3/1```"
-)
+micron_e_die_3600_lasch_rtts = "```2x8GB    0/0/5\n2x16GB   0/3/1 (Alternativ 7/3/1 o. 5/3/1)\n4x8GB    7/3/1\n4x16GB   7/3/1```"
 
 micron_e_die_3733_lasch_spannung = "```VDIMM       1,38\n```"
 micron_e_die_3733_lasch_timings = "```tCL        16   tWRWRSCL     4\ntRCDRD     19   tRFC       600\ntRCDWR     16   tCWL        16\ntRP        16   tRTP        12\ntRAS       38   tRDWR       12\ntRC        60   tWRRD        7\ntRRDS       6   tWRWRSC      1\ntRRDL       9   tWRWRSD      7\ntFAW       36   tWRWRDD      7\ntWTRS       5   tRDRDSC      1\ntWTRL      12   tRDRDSD      5\ntWR        24   tRDRDDD      5\ntRDRDSCL    4   tCKE         1\n```"
-micron_e_die_3733_lasch_rtts = (
-    "```2x8GB    0/0/5\n2x16GB   0/3/1\n4x8GB    7/3/1\n4x16GB   7/3/1```"
-)
+micron_e_die_3733_lasch_rtts = "```2x8GB    0/0/5\n2x16GB   0/3/1 (Alternativ 7/3/1 o. 5/3/1)\n4x8GB    7/3/1\n4x16GB   7/3/1```"
 
 micron_e_die_3733_scharf_spannung = "```VDIMM       1,40\n```"
 micron_e_die_3733_scharf_timings = "```tCL        16   tWRWRSCL     4\ntRCDRD     19   tRFC       550\ntRCDWR     16   tCWL        16\ntRP        16   tRTP        12\ntRAS       34   tRDWR       10\ntRC        56   tWRRD        7\ntRRDS       6   tWRWRSC      1\ntRRDL       8   tWRWRSD      7\ntFAW       24   tWRWRDD      7\ntWTRS       4   tRDRDSC      1\ntWTRL      10   tRDRDSD      5\ntWR        16   tRDRDDD      5\ntRDRDSCL    4   tCKE         1\n```"
-micron_e_die_3733_scharf_rtts = (
-    "```2x8GB    0/0/5\n2x16GB   0/3/1\n4x8GB    7/3/1\n4x16GB   7/3/1```"
-)
+micron_e_die_3733_scharf_rtts = "```2x8GB    0/0/5\n2x16GB   0/3/1 (Alternativ 7/3/1 o. 5/3/1)\n4x8GB    7/3/1\n4x16GB   7/3/1```"
 
 micron_e_die_3800_lasch_spannung = "```VDIMM       1,38\n```"
 micron_e_die_3800_lasch_timings = "```tCL        16   tWRWRSCL     4\ntRCDRD     19   tRFC       625\ntRCDWR     16   tCWL        16\ntRP        16   tRTP        12\ntRAS       40   tRDWR       12\ntRC        65   tWRRD        7\ntRRDS       6   tWRWRSC      1\ntRRDL      10   tWRWRSD      7\ntFAW       36   tWRWRDD      7\ntWTRS       5   tRDRDSC      1\ntWTRL      12   tRDRDSD      5\ntWR        24   tRDRDDD      5\ntRDRDSCL    4   tCKE         1\n```"
-micron_e_die_3800_lasch_rtts = (
-    "```2x8GB    0/0/5\n2x16GB   0/3/1\n4x8GB    7/3/1\n4x16GB   7/3/1```"
-)
+micron_e_die_3800_lasch_rtts = "```2x8GB    0/0/5\n2x16GB   0/3/1 (Alternativ 7/3/1 o. 5/3/1)\n4x8GB    7/3/1\n4x16GB   7/3/1```"
 
 micron_e_die_3800_scharf_spannung = "```VDIMM       1,40\n```"
 micron_e_die_3800_scharf_timings = "```tCL        16   tWRWRSCL     4\ntRCDRD     19   tRFC       560\ntRCDWR     16   tCWL        16\ntRP        16   tRTP        12\ntRAS       38   tRDWR       10\ntRC        60   tWRRD        7\ntRRDS       6   tWRWRSC      1\ntRRDL       9   tWRWRSD      7\ntFAW       24   tWRWRDD      7\ntWTRS       4   tRDRDSC      1\ntWTRL      10   tRDRDSD      5\ntWR        16   tRDRDDD      5\ntRDRDSCL    4   tCKE         1\n```"
-micron_e_die_3800_scharf_rtts = (
-    "```2x8GB    0/0/5\n2x16GB   0/3/1\n4x8GB    7/3/1\n4x16GB   7/3/1```"
-)
+micron_e_die_3800_scharf_rtts = "```2x8GB    0/0/5\n2x16GB   0/3/1 (Alternativ 7/3/1 o. 5/3/1)\n4x8GB    7/3/1\n4x16GB   7/3/1```"
 
-micron_e_die_cads = "```24/24/24/24```"
+micron_e_die_cads = "```24/20/20/24```"
+
+micron_e_die_3800_scharf_spannung_gdmoff = "```VDIMM       1,44\n```"
+micron_e_die_3800_scharf_timings_gdmoff = "```tCL        15   tWRWRSCL     4\ntRCDRD     18   tRFC       550\ntRCDWR     15   tCWL        14\ntRP        15   tRTP        12\ntRAS       32   tRDWR       10\ntRC        60   tWRRD        4\ntRRDS       4   tWRWRSC      1\ntRRDL       6   tWRWRSD      7\ntFAW       16   tWRWRDD      7\ntWTRS       5   tRDRDSC      1\ntWTRL      10   tRDRDSD      5\ntWR        16   tRDRDDD      5\ntRDRDSCL    4   tCKE         1\n```"
+micron_e_die_3800_scharf_rtts_gdmoff = "```7/3/1```"
+
+micron_e_die_gdmoff_cads = "```24/24/24/24```"
 
 hynix_cjr_3600_spannung = "```VDIMM       1,35 - 1,37```"
 hynix_cjr_3600_timings = "```tCL        16   tWRWRSCL     4\ntRCDRD     18   tRFC       480\ntRCDWR     16   tCWL        16\ntRP        19   tRTP        12\ntRAS       38   tRDWR        9\ntRC        58   tWRRD        2\ntRRDS       6   tWRWRSC      1\ntRRDL       9   tWRWRSD      7\ntFAW       36   tWRWRDD      7\ntWTRS       4   tRDRDSC      1\ntWTRL      12   tRDRDSD      5\ntWR        12   tRDRDDD      5\ntRDRDSCL    4   tCKE         1\n```"
@@ -234,6 +230,13 @@ class Timings(commands.Cog):
                             spannung = micron_e_die_3800_scharf_spannung
                             timings = micron_e_die_3800_scharf_timings
                             rtts = micron_e_die_3800_scharf_rtts
+                        elif preset == "gdmoff":
+                            title = "**Micron Rev. E 3800 GDM OFF Timings**"
+                            clk = "```MEMCLK          3800       FCLK           1900\nPowerDownMode   Disabled   GearDownMode   Disabled  ```"
+                            spannung = micron_e_die_3800_scharf_spannung_gdmoff
+                            timings = micron_e_die_3800_scharf_timings_gdmoff
+                            rtts = micron_e_die_3800_scharf_rtts_gdmoff
+                            cads = micron_e_die_gdmoff_cads
                         else:
                             await ctx.send(
                                 "Es konnte keine Daten für das angegebene Preset gefunden werden."
