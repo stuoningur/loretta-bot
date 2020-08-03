@@ -91,6 +91,11 @@ class Fun(commands.Cog):
         search_url = f"https://geizhals.de/?fs={arg}"
         await ctx.send(search_url)
 
+    @commands.command(name="sgehdn")
+    async def sgehdn(self, ctx):
+        """sgehdn"""
+        await ctx.send("https://tenor.com/view/sgehdn-hi-hello-wave-greet-gif-17067641")
+
 
 def setup(bot):
     bot.add_cog(Fun(bot))
