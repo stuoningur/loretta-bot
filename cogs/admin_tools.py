@@ -1,4 +1,10 @@
+import datetime
+
+import aiosqlite
+import discord
 from discord.ext import commands
+
+DB = "userspecs.sqlite3"
 
 
 class AdminTools(commands.Cog):
@@ -15,8 +21,48 @@ class AdminTools(commands.Cog):
     @commands.command()
     @commands.has_permissions(manage_messages=True)
     async def purge(self, ctx, amount=0):
+        async with aiosqlite.connect(DB) as db:
+            user = ctx.message.author.id
+            channel = ctx.message.channel.id
+            today = datetime.datetime.now()
+            time = today.strftime("%d.%m.%Y %H:%M:%S")
+
+            insert_purge = (user, time, amount, channel)
+            await db.execute(
+                """INSERT INTO purge_log VALUES (?,?,?,?)""", insert_purge,
+            )
+            await db.commit()
+
         """Löscht die angegebene Anzahl an Nachrichten"""
         await ctx.channel.purge(limit=amount + 1)
+
+    @commands.command()
+    @commands.has_permissions(manage_messages=True)
+    async def purgelog(self, ctx, amount=10):
+        async with aiosqlite.connect(DB) as db:
+            async with db.execute(
+                    """SELECT * FROM purge_log""") as cursor:
+                result = await cursor.fetchall()
+
+                embed = discord.Embed(
+                    title="Purgelog:",
+                    colour=0xE74C3C,
+                )
+
+                for i in result[-amount:]:
+                    user = ctx.guild.get_member(i[0]).display_name
+                    time = i[1]
+                    messages = i[2]
+                    channel_name = ctx.guild.get_channel(i[3])
+                    embed.add_field(
+                        name=f"{time}", value=f"{user} hat {messages} Nachrichten im Kanal {channel_name} gelöscht", inline="false"
+                    )
+
+                    embed.set_footer(
+                        text=f"Angefordert von {ctx.message.author.display_name}",
+                        icon_url=ctx.message.author.avatar_url,
+                    )
+                await ctx.send(embed=embed)
 
     @commands.command()
     @commands.has_permissions(manage_messages=True)

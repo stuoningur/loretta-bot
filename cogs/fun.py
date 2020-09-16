@@ -96,6 +96,18 @@ class Fun(commands.Cog):
         """sgehdn"""
         await ctx.send("https://tenor.com/view/sgehdn-hi-hello-wave-greet-gif-17067641")
 
+    @commands.command(name="ud", aliases=["urban", "urbandictionary"])
+    async def urban_dictionary(self, ctx, *, arg=None):
+        """Erstellt einen urban dictionary Link"""
+        arg = arg.replace(" ", "%20")
+        search_url = f"https://www.urbandictionary.com/define.php?term={arg}"
+        await ctx.send(search_url)
+
+    @commands.command(name="schmutz")
+    async def schmutz(self, ctx):
+        """schmutz"""
+        await ctx.send("https://tenor.com/view/schmutz-dirt-filth-write-word-gif-16247714")
+
 
 def setup(bot):
     bot.add_cog(Fun(bot))
