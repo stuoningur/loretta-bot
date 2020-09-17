@@ -25,6 +25,11 @@ class Help(commands.Cog):
             inline="false",
         )
         embed.add_field(
+            name="**Lorettas Wahlurne:**",
+            value="```!vote *Titel* *Option 1* *Option 2* ... (maximal 20 Optionen)\n\nWenn der Titel oder die Optionen Leerzeichen enthalten, müssen die Anführungszeichen gesetzt werden```",
+            inline="false",
+        )
+        embed.add_field(
             name="**Lorettas spezifische Spezifikationen:**",
             value="```!specs set *hardware*         !specs show *servermitglied*\n!specs search *suchbegriff*   !specs delete```",
             inline="false",
