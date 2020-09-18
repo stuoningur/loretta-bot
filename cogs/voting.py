@@ -35,14 +35,15 @@ class Voting(commands.Cog):
     @commands.Cog.listener()
     async def on_raw_reaction_add(self, data):
         user_id = data.user_id
+        emoji = data.emoji
+        channel = self.bot.get_channel(data.channel_id)
+        message = await channel.fetch_message(data.message_id)
+        server = channel.guild
+        user = server.get_member(user_id)
+
         if user_id == self.bot.user.id:
             return
-        else:
-            emoji = data.emoji
-            channel = self.bot.get_channel(data.channel_id)
-            message = await channel.fetch_message(data.message_id)
-            server = channel.guild
-            user = server.get_member(user_id)
+        elif message.author.id == self.bot.user.id:
             search = (user_id, data.message_id, )
 
             async with aiosqlite.connect(DB) as db:
