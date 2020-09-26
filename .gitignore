@@ -134,5 +134,6 @@ dmypy.json
 # Sqlite File
 *.sqlite3
 
-# SQL test  file
+# Test files
 sql.py
+test.py

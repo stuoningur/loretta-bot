@@ -106,7 +106,8 @@ class Specs(commands.Cog):
         user = (ctx.message.author.id,)
         async with aiosqlite.connect(DB) as db:
             async with db.execute(
-                """SELECT userid FROM user_specs WHERE userid = ?""", user,
+                """SELECT userid FROM user_specs WHERE userid = ?""",
+                user,
             ) as cursor:
                 result = await cursor.fetchone()
                 if result is not None:
@@ -122,7 +123,8 @@ class Specs(commands.Cog):
                     user = ctx.message.author.id
                     insert_specs = (user, arg, time)
                     await db.execute(
-                        """INSERT INTO user_specs VALUES (?,?,?)""", insert_specs,
+                        """INSERT INTO user_specs VALUES (?,?,?)""",
+                        insert_specs,
                     )
                     await db.commit()
                     await ctx.send("Deine Spezifikationen sind jetzt registriert!")
@@ -132,7 +134,8 @@ class Specs(commands.Cog):
         user = (ctx.message.author.id,)
         async with aiosqlite.connect(DB) as db:
             await db.execute(
-                """DELETE FROM user_specs WHERE userid = ?""", user,
+                """DELETE FROM user_specs WHERE userid = ?""",
+                user,
             )
             await db.commit()
         await ctx.send("Deine Spezifikationen wurden gelöscht!")

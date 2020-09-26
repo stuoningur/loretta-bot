@@ -8,7 +8,9 @@ class Help(commands.Cog):
 
     @commands.group(name="help", aliases=["hilfe", "h"], invoke_without_command=True)
     async def help_base(self, ctx):
-        embed = discord.Embed(colour=0xE74C3C,)
+        embed = discord.Embed(
+            colour=0xE74C3C,
+        )
         embed.add_field(
             name="**Lorettas Anleitungen:**",
             value="```!bios        !cpu    !limit    !mainboard\n!anleitung   !ram    !spd      !ergebnisse```",
@@ -39,12 +41,16 @@ class Help(commands.Cog):
             value="```!help specs```",
             inline="false",
         )
-        embed.set_author(name="Lorettas Selbsthilfe Gruppe",)
+        embed.set_author(
+            name="Lorettas Selbsthilfe Gruppe",
+        )
         await ctx.send(embed=embed)
 
     @help_base.command(name="specs")
     async def help_specs(self, ctx):
-        embed = discord.Embed(colour=0xE74C3C,)
+        embed = discord.Embed(
+            colour=0xE74C3C,
+        )
         embed.add_field(
             name="**Spezifikationen festlegen:**",
             value="Um deine Spezifikationen bei Loretta zu registrieren, nutze den `!specs set` Befehl gefolgt von deiner Hardware.\nEs wird [Discords Markdown](https://support.discordapp.com/hc/de/articles/210298617) unterstützt, Zeilenumbrüche sind mit Umschalt+Enter möglich.\n**Beispiel**:\n```!specs set\n**CPU:** AMD Ryzen 11 9999X\n**Mainboard:** ASUS ROG Crosshair VIIII Extreme\n**RAM:** 32GB Crucial Ballistix DDR7 @ 9000 CL6```",
@@ -65,7 +71,9 @@ class Help(commands.Cog):
             value="Um deine Spezifikationen zu löschen, nutze den `!specs delete` Befehl.\n**Beispiel**:\n```!specs delete```\n**ACHTUNG:** Die Spezifikationen werden dabei unwiderruflich gelöscht.",
             inline="false",
         )
-        embed.set_author(name="Lorettas spezifische Spezifikationen",)
+        embed.set_author(
+            name="Lorettas spezifische Spezifikationen",
+        )
         await ctx.send(embed=embed)
 
 

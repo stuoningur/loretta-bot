@@ -15,8 +15,7 @@ class Voting(commands.Cog):
     @commands.has_permissions(manage_messages=True)
     async def vote(self, ctx, title: commands.clean_content, *options: str) -> None:
         if len(title) > 256:
-            await ctx.send(
-                "Der Titel kann nicht länger als 256 Zeichen sein")
+            await ctx.send("Der Titel kann nicht länger als 256 Zeichen sein")
         elif len(options) < 2:
             await ctx.send("Bitte gebe mindestens 2 Auswahlmöglichkeiten an.")
         elif len(options) > 20:
@@ -24,10 +23,11 @@ class Voting(commands.Cog):
 
         else:
             codepoint_start = 127462
-            options = {chr(i): f"{chr(i)} - {v}" for i,
-                       v in enumerate(options, start=codepoint_start)}
-            embed = discord.Embed(
-                title=title, description="\n".join(options.values()))
+            options = {
+                chr(i): f"{chr(i)} - {v}"
+                for i, v in enumerate(options, start=codepoint_start)
+            }
+            embed = discord.Embed(title=title, description="\n".join(options.values()))
             message = await ctx.send(embed=embed)
             for reaction in options:
                 await message.add_reaction(reaction)
@@ -44,37 +44,54 @@ class Voting(commands.Cog):
         if user_id == self.bot.user.id:
             return
         elif message.author.id == self.bot.user.id:
-            search = (user_id, data.message_id, )
+            search = (
+                user_id,
+                data.message_id,
+            )
 
             async with aiosqlite.connect(DB) as db:
                 async with db.execute(
-                        """SELECT user_id FROM voting WHERE user_id = ? AND message_id=?""", search) as cursor:
+                    """SELECT user_id FROM voting WHERE user_id = ? AND message_id=?""",
+                    search,
+                ) as cursor:
                     result = await cursor.fetchone()
 
                     if result is None:
-                        insert = (data.message_id, user_id, str(emoji),)
+                        insert = (
+                            data.message_id,
+                            user_id,
+                            str(emoji),
+                        )
                         await db.execute(
-                            """INSERT INTO voting VALUES (?,?,?)""", insert)
+                            """INSERT INTO voting VALUES (?,?,?)""", insert
+                        )
                         await db.commit()
 
                     else:
                         await message.remove_reaction(emoji, user)
 
-    @ commands.Cog.listener()
+    @commands.Cog.listener()
     async def on_raw_reaction_remove(self, data):
         user_id = data.user_id
         emoji = data.emoji
-        search = (user_id, data.message_id, str(emoji),)
+        search = (
+            user_id,
+            data.message_id,
+            str(emoji),
+        )
         async with aiosqlite.connect(DB) as db:
             async with db.execute(
-                    """SELECT user_id FROM voting WHERE user_id = ? AND message_id=? AND emoji = ?""", search) as cursor:
+                """SELECT user_id FROM voting WHERE user_id = ? AND message_id=? AND emoji = ?""",
+                search,
+            ) as cursor:
                 result = await cursor.fetchone()
 
                 if result is None:
                     pass
                 else:
                     await db.execute(
-                        """DELETE FROM voting WHERE user_id = ? AND message_id=? AND emoji = ?""", search,
+                        """DELETE FROM voting WHERE user_id = ? AND message_id=? AND emoji = ?""",
+                        search,
                     )
                     await db.commit()
 

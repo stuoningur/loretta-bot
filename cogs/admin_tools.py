@@ -29,7 +29,8 @@ class AdminTools(commands.Cog):
 
             insert_purge = (user, time, amount, channel)
             await db.execute(
-                """INSERT INTO purge_log VALUES (?,?,?,?)""", insert_purge,
+                """INSERT INTO purge_log VALUES (?,?,?,?)""",
+                insert_purge,
             )
             await db.commit()
 
@@ -40,8 +41,7 @@ class AdminTools(commands.Cog):
     @commands.has_permissions(manage_messages=True)
     async def purgelog(self, ctx, amount=10):
         async with aiosqlite.connect(DB) as db:
-            async with db.execute(
-                    """SELECT * FROM purge_log""") as cursor:
+            async with db.execute("""SELECT * FROM purge_log""") as cursor:
                 result = await cursor.fetchall()
 
                 embed = discord.Embed(
@@ -55,7 +55,9 @@ class AdminTools(commands.Cog):
                     messages = i[2]
                     channel_name = ctx.guild.get_channel(i[3])
                     embed.add_field(
-                        name=f"{time}", value=f"{user} hat {messages} Nachrichten im Kanal {channel_name} gelöscht", inline="false"
+                        name=f"{time}",
+                        value=f"{user} hat {messages} Nachrichten im Kanal {channel_name} gelöscht",
+                        inline="false",
                     )
 
                     embed.set_footer(

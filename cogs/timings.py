@@ -269,24 +269,38 @@ class Timings(commands.Cog):
                 await ctx.send("Der Hersteller konnte nicht gefunden werden.")
                 return
 
-        embed = discord.Embed(colour=0xE74C3C,)
-        embed.add_field(
-            name="**Preset:**", value=title, inline="false",
+        embed = discord.Embed(
+            colour=0xE74C3C,
         )
         embed.add_field(
-            name="**Taktraten:**", value=clk, inline="false",
+            name="**Preset:**",
+            value=title,
+            inline="false",
         )
         embed.add_field(
-            name="**Spannungen:**", value=spannung, inline="false",
+            name="**Taktraten:**",
+            value=clk,
+            inline="false",
         )
         embed.add_field(
-            name="**Timings:**", value=timings, inline="false",
+            name="**Spannungen:**",
+            value=spannung,
+            inline="false",
         )
         embed.add_field(
-            name="**RTTs:**", value=rtts, inline="false",
+            name="**Timings:**",
+            value=timings,
+            inline="false",
         )
         embed.add_field(
-            name="**CADs:**", value=cads, inline="false",
+            name="**RTTs:**",
+            value=rtts,
+            inline="false",
+        )
+        embed.add_field(
+            name="**CADs:**",
+            value=cads,
+            inline="false",
         )
         embed.set_author(name=f"Lorettas Timings")
         await ctx.send(embed=embed)

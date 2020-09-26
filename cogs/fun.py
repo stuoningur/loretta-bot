@@ -106,7 +106,16 @@ class Fun(commands.Cog):
     @commands.command(name="schmutz")
     async def schmutz(self, ctx):
         """schmutz"""
-        await ctx.send("https://tenor.com/view/schmutz-dirt-filth-write-word-gif-16247714")
+        await ctx.send(
+            "https://tenor.com/view/schmutz-dirt-filth-write-word-gif-16247714"
+        )
+
+    @commands.command(name="random")
+    async def random(self, ctx, *, arg):
+        """random"""
+        random_cap = "".join(random.choice((str.upper, str.lower))(c) for c in arg)
+
+        await ctx.send(random_cap)
 
 
 def setup(bot):
