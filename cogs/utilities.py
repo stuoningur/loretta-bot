@@ -10,6 +10,12 @@ class Utilities(commands.Cog):
         """Sendet einen Ping und zeigt die Latenz an"""
         await ctx.send(f"Pong! Die Latenz beträgt {round(self.bot.latency * 1000)}ms")
 
+    @commands.command()
+    @commands.is_owner()
+    async def passthrough(self, ctx, channel_id, arg):
+        channel = self.bot.get_channel(int(channel_id))
+        await channel.send(arg)
+
 
 def setup(bot):
     bot.add_cog(Utilities(bot))

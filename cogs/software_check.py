@@ -14,7 +14,15 @@ class SoftwareCheck(commands.Cog):
         channel = self.bot.get_channel(675451281690722330)
         rss_feed = feedparser.parse("https://www.computerbase.de/rss/downloads.xml")
         entries = rss_feed.entries
-        keywords = ["firefox", "hwinfo", "capframex"]
+        keywords = [
+            "aida64",
+            "hwinfo",
+            "capframex",
+            "ryzen master",
+            "cpu-z",
+            "gpu-z",
+            "afterburner",
+        ]
         for entry in entries:
             if any(keyword in entry.title.lower() for keyword in keywords):
                 time_now = datetime.datetime.now()
