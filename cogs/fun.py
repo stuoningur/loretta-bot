@@ -117,6 +117,13 @@ class Fun(commands.Cog):
 
         await ctx.send(random_cap)
 
+    @commands.command(name="down")
+    async def downjustforme(self, ctx, *, arg=None):
+        """Erstellt einen IGFD Link"""
+        arg = arg.replace(" ", "+")
+        search_url = f"https://downforeveryoneorjustme.com/{arg}"
+        await ctx.send(search_url)
+
 
 def setup(bot):
     bot.add_cog(Fun(bot))

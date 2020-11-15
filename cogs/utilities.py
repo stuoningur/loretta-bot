@@ -1,3 +1,5 @@
+import datetime
+
 from discord.ext import commands
 
 
@@ -11,10 +13,19 @@ class Utilities(commands.Cog):
         await ctx.send(f"Pong! Die Latenz beträgt {round(self.bot.latency * 1000)}ms")
 
     @commands.command()
-    @commands.is_owner()
+    @commands.has_permissions(manage_messages=True)
     async def passthrough(self, ctx, channel_id, arg):
         channel = self.bot.get_channel(int(channel_id))
         await channel.send(arg)
+
+    @commands.Cog.listener()
+    async def on_member_remove(self, member):
+        today = datetime.datetime.now()
+        time = today.strftime("%d.%m.%Y %H:%M")
+        channel = self.bot.get_channel(762174666709139466)
+        await channel.send(
+            f"Der User {member.display_name} hat den Server am {time} verlassen. Die User ID ist {str(member.id)}"
+        )
 
 
 def setup(bot):

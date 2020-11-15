@@ -1,7 +1,7 @@
 import datetime
 import discord
 import aiosqlite
-import discord
+
 from discord.ext import commands
 
 DB = "userspecs.sqlite3"
