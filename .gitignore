@@ -137,3 +137,4 @@ dmypy.json
 # Test files
 sql.py
 test.py
+creds.json

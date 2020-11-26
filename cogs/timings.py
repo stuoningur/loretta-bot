@@ -1,70 +1,20 @@
 import discord
 from discord.ext import commands
+from tabulate import tabulate
 
-samsung_b_die_3600_lasch_spannung = "```VDIMM       1,35 - 1,38\nVDDG        0,95 - 1,05 (IOD & CCD)\nCLDO VDDP   855 - 1050\n```"
-samsung_b_die_3600_lasch_timings = "```tCL        16        tWRWRSCL     4\ntRCDRD     16 (17)   tRFC       288\ntRCDWR     16        tCWL        16\ntRP        16        tRTP        12\ntRAS       32        tRDWR       10\ntRC        42        tWRRD        4\ntRRDS      4         tWRWRSC      1\ntRRDL      6         tWRWRSD      7\ntFAW       24        tWRWRDD      7\ntWTRS      6         tRDRDSC      1\ntWTRL      12        tRDRDSD      5\ntWR        14        tRDRDDD      5\ntRDRDSCL   4         tCKE         1\n```"
-samsung_b_die_3600_lasch_rtts = "```2x8GB    0/0/5\n2x16GB   0/3/1 (Alternativ 0/2/1, 7/2/1 o. 5/2/1)\n4x8GB    7/3/1\n4x16GB   7/3/1```"
+import gspread_asyncio
+from oauth2client.service_account import ServiceAccountCredentials
 
-samsung_b_die_3600_scharf_spannung = "```VDIMM       1,37 - 1,42\nVDDG        0,95 - 1,05 (IOD & CCD)\nCLDO VDDP   855 - 1050\n```"
-samsung_b_die_3600_scharf_timings = "```tCL        14        tWRWRSCL     4\ntRCDRD     14 (15)   tRFC       252\ntRCDWR     14        tCWL        14\ntRP        14        tRTP        12\ntRAS       28        tRDWR        8\ntRC        38        tWRRD        2\ntRRDS      4         tWRWRSC      1\ntRRDL      6         tWRWRSD      7\ntFAW       16        tWRWRDD      7\ntWTRS      4         tRDRDSC      1\ntWTRL      8         tRDRDSD      5\ntWR        14        tRDRDDD      5\ntRDRDSCL   4         tCKE         1\n```"
-samsung_b_die_3600_scharf_rtts = "```2x8GB    0/0/5\n2x16GB   0/3/1 (Alternativ 0/2/1, 7/2/1 o. 5/2/1)\n4x8GB    7/3/1\n4x16GB   7/3/1```"
 
-samsung_b_die_3733_lasch_spannung = "```VDIMM       1,37 - 1,42\nVDDG        0,95 - 1,05 (IOD & CCD)\nCLDO VDDP   855 - 1050\n```"
-samsung_b_die_3733_lasch_timings = "```tCL        16        tWRWRSCL     4\ntRCDRD     16 (17)   tRFC       299\ntRCDWR     16        tCWL        16\ntRP        16        tRTP        12\ntRAS       32        tRDWR       10\ntRC        42        tWRRD        4\ntRRDS      4         tWRWRSC      1\ntRRDL      6         tWRWRSD      7\ntFAW       24        tWRWRDD      7\ntWTRS      6         tRDRDSC      1\ntWTRL      12        tRDRDSD      5\ntWR        14        tRDRDDD      5\ntRDRDSCL   4         tCKE         1\n```"
-samsung_b_die_3733_lasch_rtts = "```2x8GB    0/0/5\n2x16GB   0/3/1 (Alternativ 0/2/1, 7/2/1 o. 5/2/1)\n4x8GB    7/3/1\n4x16GB   7/3/1```"
-
-samsung_b_die_3733_scharf_spannung = "```VDIMM       1,42 - 1,47\nVDDG        0,95 - 1,05 (IOD & CCD)\nCLDO VDDP   855 - 1050\n```"
-samsung_b_die_3733_scharf_timings = "```tCL        14          tWRWRSCL     4\ntRCDRD     15 (16)     tRFC       261\ntRCDWR     14          tCWL        14\ntRP        14          tRTP        12\ntRAS       28          tRDWR        8\ntRC        38 (42)     tWRRD        2\ntRRDS       4          tWRWRSC      1\ntRRDL       6          tWRWRSD      7\ntFAW       16          tWRWRDD      7\ntWTRS       4          tRDRDSC      1\ntWTRL       8          tRDRDSD      5\ntWR        14          tRDRDDD      5\ntRDRDSCL    4          tCKE         1\n```"
-samsung_b_die_3733_scharf_rtts = "```2x8GB    0/0/5\n2x16GB   0/3/1 (Alternativ 0/2/1, 7/2/1 o. 5/2/1)\n4x8GB    7/3/1\n4x16GB   7/3/1```"
-
-samsung_b_die_3800_lasch_spannung = "```VDIMM       1,40 - 1,45\nVDDG        0,95 - 1,05 (IOD & CCD)\nCLDO VDDP   855 - 1050\n```"
-samsung_b_die_3800_lasch_timings = "```tCL        16          tWRWRSCL     4\ntRCDRD     16 (17)     tRFC       304\ntRCDWR     16          tCWL        16\ntRP        16          tRTP        12\ntRAS       32          tRDWR       10\ntRC        42          tWRRD        4\ntRRDS       4          tWRWRSC      1\ntRRDL       6          tWRWRSD      7\ntFAW       24          tWRWRDD      7\ntWTRS       6          tRDRDSC      1\ntWTRL      12          tRDRDSD      5\ntWR        14          tRDRDDD      5\ntRDRDSCL    4          tCKE         1\n```"
-samsung_b_die_3800_lasch_rtts = "```2x8GB    0/0/5\n2x16GB   0/3/1 (Alternativ 0/2/1, 7/2/1 o. 5/2/1)\n4x8GB    7/3/1\n4x16GB   7/3/1```"
-
-samsung_b_die_3800_scharf_spannung = "```VDIMM       1,45 - 1,50\nVDDG        0,95 - 1,05 (IOD & CCD)\nCLDO VDDP   855 - 1050\n```"
-samsung_b_die_3800_scharf_timings = "```tCL        14          tWRWRSCL     4\ntRCDRD     15 (16)     tRFC       266\ntRCDWR     14          tCWL        14\ntRP        14          tRTP        12\ntRAS       28          tRDWR        8\ntRC        38 (42)     tWRRD        2 (4)\ntRRDS       4          tWRWRSC      1\ntRRDL       6          tWRWRSD      7\ntFAW       16          tWRWRDD      7\ntWTRS       4          tRDRDSC      1\ntWTRL       8          tRDRDSD      5\ntWR        14          tRDRDDD      5\ntRDRDSCL    4          tCKE         1\n```"
-samsung_b_die_3800_scharf_rtts = "```2x8GB    0/0/5\n2x16GB   0/3/1 (Alternativ 0/2/1, 7/2/1 o. 5/2/1)\n4x8GB    7/3/1\n4x16GB   7/3/1```"
-
-samsung_b_die_cads = "```24/20/20/24\n24/20/24/24\n24/24/24/24\n60/20/24/24```"
-
-samsung_c_die_3600_lasch_spannung = "```VDIMM       1,28 - 1,33```"
-samsung_c_die_3600_lasch_timings = "```tCL        18   tWRWRSCL     4\ntRCDRD     22   tRFC       560\ntRCDWR     22   tCWL        18\ntRP        22   tRTP        12\ntRAS       45   tRDWR       12\ntRC        65   tWRRD        4\ntRRDS       6   tWRWRSC      1\ntRRDL      10   tWRWRSD      7\ntFAW       36   tWRWRDD      7\ntWTRS       4   tRDRDSC      1\ntWTRL      12   tRDRDSD      5\ntWR        24   tRDRDDD      5\ntRDRDSCL    4   tCKE         1\n```"
-samsung_c_die_3600_lasch_rtts = "```TBD```"
-
-samsung_c_die_cads = "```TBD```"
-
-micron_e_die_3600_lasch_spannung = "```VDIMM       1,35 - 1,37\n```"
-micron_e_die_3600_lasch_timings = "```tCL        16   tWRWRSCL     4\ntRCDRD     19   tRFC       570\ntRCDWR     16   tCWL        16\ntRP        16   tRTP        12\ntRAS       40   tRDWR       10\ntRC        65   tWRRD        4\ntRRDS       4   tWRWRSC      1\ntRRDL       7   tWRWRSD      7\ntFAW       24   tWRWRDD      7\ntWTRS       4   tRDRDSC      1\ntWTRL      12   tRDRDSD      5\ntWR        24   tRDRDDD      5\ntRDRDSCL    4   tCKE         1\n```"
-micron_e_die_3600_lasch_rtts = "```2x8GB    0/0/5\n2x16GB   0/3/1 (Alternativ 7/3/1 o. 5/3/1)\n4x8GB    7/3/1\n4x16GB   7/3/1```"
-
-micron_e_die_3733_lasch_spannung = "```VDIMM       1,38\n```"
-micron_e_die_3733_lasch_timings = "```tCL        16   tWRWRSCL     4\ntRCDRD     19   tRFC       600\ntRCDWR     16   tCWL        16\ntRP        16   tRTP        12\ntRAS       38   tRDWR       12\ntRC        60   tWRRD        7\ntRRDS       6   tWRWRSC      1\ntRRDL       9   tWRWRSD      7\ntFAW       36   tWRWRDD      7\ntWTRS       5   tRDRDSC      1\ntWTRL      12   tRDRDSD      5\ntWR        24   tRDRDDD      5\ntRDRDSCL    4   tCKE         1\n```"
-micron_e_die_3733_lasch_rtts = "```2x8GB    0/0/5\n2x16GB   0/3/1 (Alternativ 7/3/1 o. 5/3/1)\n4x8GB    7/3/1\n4x16GB   7/3/1```"
-
-micron_e_die_3733_scharf_spannung = "```VDIMM       1,40\n```"
-micron_e_die_3733_scharf_timings = "```tCL        16   tWRWRSCL     4\ntRCDRD     19   tRFC       550\ntRCDWR     16   tCWL        16\ntRP        16   tRTP        12\ntRAS       34   tRDWR       10\ntRC        56   tWRRD        7\ntRRDS       6   tWRWRSC      1\ntRRDL       8   tWRWRSD      7\ntFAW       24   tWRWRDD      7\ntWTRS       4   tRDRDSC      1\ntWTRL      10   tRDRDSD      5\ntWR        16   tRDRDDD      5\ntRDRDSCL    4   tCKE         1\n```"
-micron_e_die_3733_scharf_rtts = "```2x8GB    0/0/5\n2x16GB   0/3/1 (Alternativ 7/3/1 o. 5/3/1)\n4x8GB    7/3/1\n4x16GB   7/3/1```"
-
-micron_e_die_3800_lasch_spannung = "```VDIMM       1,38\n```"
-micron_e_die_3800_lasch_timings = "```tCL        16   tWRWRSCL     4\ntRCDRD     19   tRFC       625\ntRCDWR     16   tCWL        16\ntRP        16   tRTP        12\ntRAS       40   tRDWR       12\ntRC        65   tWRRD        7\ntRRDS       6   tWRWRSC      1\ntRRDL      10   tWRWRSD      7\ntFAW       36   tWRWRDD      7\ntWTRS       5   tRDRDSC      1\ntWTRL      12   tRDRDSD      5\ntWR        24   tRDRDDD      5\ntRDRDSCL    4   tCKE         1\n```"
-micron_e_die_3800_lasch_rtts = "```2x8GB    0/0/5\n2x16GB   0/3/1 (Alternativ 7/3/1 o. 5/3/1)\n4x8GB    7/3/1\n4x16GB   7/3/1```"
-
-micron_e_die_3800_scharf_spannung = "```VDIMM       1,40\n```"
-micron_e_die_3800_scharf_timings = "```tCL        16   tWRWRSCL     4\ntRCDRD     19   tRFC       560\ntRCDWR     16   tCWL        16\ntRP        16   tRTP        12\ntRAS       38   tRDWR       10\ntRC        60   tWRRD        7\ntRRDS       6   tWRWRSC      1\ntRRDL       9   tWRWRSD      7\ntFAW       24   tWRWRDD      7\ntWTRS       4   tRDRDSC      1\ntWTRL      10   tRDRDSD      5\ntWR        16   tRDRDDD      5\ntRDRDSCL    4   tCKE         1\n```"
-micron_e_die_3800_scharf_rtts = "```2x8GB    0/0/5\n2x16GB   0/3/1 (Alternativ 7/3/1 o. 5/3/1)\n4x8GB    7/3/1\n4x16GB   7/3/1```"
-
-micron_e_die_cads = "```24/24/24/24```"
-
-micron_e_die_3800_scharf_spannung_gdmoff = "```VDIMM       1,44\n```"
-micron_e_die_3800_scharf_timings_gdmoff = "```tCL        15   tWRWRSCL     4\ntRCDRD     18   tRFC       550\ntRCDWR     15   tCWL        14\ntRP        15   tRTP        12\ntRAS       32   tRDWR       10\ntRC        60   tWRRD        4\ntRRDS       4   tWRWRSC      1\ntRRDL       6   tWRWRSD      7\ntFAW       16   tWRWRDD      7\ntWTRS       5   tRDRDSC      1\ntWTRL      10   tRDRDSD      5\ntWR        16   tRDRDDD      5\ntRDRDSCL    4   tCKE         1\n```"
-micron_e_die_3800_scharf_rtts_gdmoff = "```7/3/1```"
-
-micron_e_die_gdmoff_cads = "```24/20/20/24```"
-
-hynix_cjr_3600_spannung = "```VDIMM       1,35 - 1,37```"
-hynix_cjr_3600_timings = "```tCL        16   tWRWRSCL     4\ntRCDRD     18   tRFC       480\ntRCDWR     16   tCWL        16\ntRP        19   tRTP        12\ntRAS       38   tRDWR        9\ntRC        58   tWRRD        2\ntRRDS       6   tWRWRSC      1\ntRRDL       9   tWRWRSD      7\ntFAW       36   tWRWRDD      7\ntWTRS       4   tRDRDSC      1\ntWTRL      12   tRDRDSD      5\ntWR        12   tRDRDDD      5\ntRDRDSCL    4   tCKE         1\n```"
-hynix_cjr_3600_rtts = "```TBD```"
-hynix_cjr_cads = "```TBD```"
+def get_creds():
+    return ServiceAccountCredentials.from_json_keyfile_name(
+        "creds.json",
+        [
+            "https://spreadsheets.google.com/feeds",
+            "https://www.googleapis.com/auth/drive",
+            "https://www.googleapis.com/auth/spreadsheets",
+        ],
+    )
 
 
 class Timings(commands.Cog):
@@ -77,233 +27,197 @@ class Timings(commands.Cog):
         ctx,
         vendor: str = None,
         ics: str = None,
-        memclk: int = None,
+        memclk: str = None,
         preset: str = None,
+        generation: str = "zen2",
     ):
-        vendor = vendor.lower()
-        ics = ics.lower()
-        preset = preset.lower()
-        if vendor is None or ics is None or memclk is None or preset is None:
+        if (
+            vendor is None
+            or ics is None
+            or memclk is None
+            or preset is None
+            or generation is None
+        ):
             await ctx.send("Es fehlt ein oder mehrere Argumente")
         else:
-            if vendor == "samsung":
-                if ics == "bdie":
-                    cads = samsung_b_die_cads
-                    if memclk == 3600:
-                        if preset == "lasch":
-                            title = "**Samsung B-Die 3600 Lasche Timings**"
-                            clk = "```MEMCLK          3600       FCLK           1800\nPowerDownMode   Disabled   GearDownMode   Enabled  ```"
-                            spannung = samsung_b_die_3600_lasch_spannung
-                            timings = samsung_b_die_3600_lasch_timings
-                            rtts = samsung_b_die_3600_lasch_rtts
-                        elif preset == "scharf":
-                            title = "**Samsung B-Die 3600 Scharfe Timings**"
-                            clk = "```MEMCLK          3600       FCLK           1800\nPowerDownMode   Disabled   GearDownMode   Enabled  ```"
-                            spannung = samsung_b_die_3600_scharf_spannung
-                            timings = samsung_b_die_3600_scharf_timings
-                            rtts = samsung_b_die_3600_scharf_rtts
-                        else:
-                            await ctx.send(
-                                "Es konnte keine Daten für das angegebene Preset gefunden werden."
-                            )
-                            return
-                    elif memclk == 3733:
-                        if preset == "lasch":
-                            title = "**Samsung B-Die 3733 Lasche Timings**"
-                            clk = "```MEMCLK          3733       FCLK           1866\nPowerDownMode   Disabled   GearDownMode   Enabled  ```"
-                            spannung = samsung_b_die_3733_lasch_spannung
-                            timings = samsung_b_die_3733_lasch_timings
-                            rtts = samsung_b_die_3733_lasch_rtts
-                        elif preset == "scharf":
-                            title = "**Samsung B-Die 3733 Scharfe Timings**"
-                            clk = "```MEMCLK          3733       FCLK           1866\nPowerDownMode   Disabled   GearDownMode   Enabled  ```"
-                            spannung = samsung_b_die_3733_scharf_spannung
-                            timings = samsung_b_die_3733_scharf_timings
-                            rtts = samsung_b_die_3733_scharf_rtts
-                        else:
-                            await ctx.send(
-                                "Es konnte keine Daten für das angegebene Preset gefunden werden."
-                            )
-                            return
-                    elif memclk == 3800:
-                        if preset == "lasch":
-                            title = "**Samsung B-Die 3800 Lasche Timings**"
-                            clk = "```MEMCLK          3800       FCLK           1900\nPowerDownMode   Disabled   GearDownMode   Enabled  ```"
-                            spannung = samsung_b_die_3800_lasch_spannung
-                            timings = samsung_b_die_3800_lasch_timings
-                            rtts = samsung_b_die_3800_lasch_rtts
-                        elif preset == "scharf":
-                            title = "**Samsung B-Die 3800 Scharfe Timings**"
-                            clk = "```MEMCLK          3800       FCLK           1900\nPowerDownMode   Disabled   GearDownMode   Enabled  ```"
-                            spannung = samsung_b_die_3800_scharf_spannung
-                            timings = samsung_b_die_3800_scharf_timings
-                            rtts = samsung_b_die_3800_scharf_rtts
-                        else:
-                            await ctx.send(
-                                "Es konnte keine Daten für das angegebene Preset gefunden werden."
-                            )
-                            return
-                    else:
-                        await ctx.send(
-                            "Es konnten keine Daten für den angegebenen RAM Takt gefunden werden."
-                        )
-                        return
-                elif ics == "cdie":
-                    cads = samsung_c_die_cads
-                    if memclk == 3600:
-                        if preset == "lasch":
-                            title = "**Samsung C-Die 3600 Lasche Timings**"
-                            clk = "```MEMCLK          3600       FCLK           1800\nPowerDownMode   Disabled   GearDownMode   Enabled  ```"
-                            spannung = samsung_c_die_3600_lasch_spannung
-                            timings = samsung_c_die_3600_lasch_timings
-                            rtts = samsung_c_die_3600_lasch_rtts
-                        else:
-                            await ctx.send(
-                                "Es konnte keine Daten für das angegebene Preset gefunden werden."
-                            )
-                            return
-                    else:
-                        await ctx.send(
-                            "Es konnten keine Daten für den angegebenen RAM Takt gefunden werden."
-                        )
-                        return
-                else:
-                    await ctx.send(
-                        "Es konnten keine Daten für die angegebenen Speicher-ICs gefunden werden."
-                    )
-                    return
-            elif vendor == "micron":
-                if ics == "edie":
-                    cads = micron_e_die_cads
-                    if memclk == 3600:
-                        if preset == "lasch":
-                            title = "**Micron Rev. E 3600 Lasche Timings**"
-                            clk = "```MEMCLK          3600       FCLK           1800\nPowerDownMode   Disabled   GearDownMode   Enabled  ```"
-                            spannung = micron_e_die_3600_lasch_spannung
-                            timings = micron_e_die_3600_lasch_timings
-                            rtts = micron_e_die_3600_lasch_rtts
-                        else:
-                            await ctx.send(
-                                "Es konnte keine Daten für das angegebene Preset gefunden werden."
-                            )
-                            return
-                    elif memclk == 3733:
-                        if preset == "lasch":
-                            title = "**Micron Rev. E 3733 Lasche Timings**"
-                            clk = "```MEMCLK          3733       FCLK           1866\nPowerDownMode   Disabled   GearDownMode   Enabled  ```"
-                            spannung = micron_e_die_3733_lasch_spannung
-                            timings = micron_e_die_3733_lasch_timings
-                            rtts = micron_e_die_3733_lasch_rtts
-                        elif preset == "scharf":
-                            title = "**Micron Rev. E 3733 Scharfe Timings**"
-                            clk = "```MEMCLK          3733       FCLK           1866\nPowerDownMode   Disabled   GearDownMode   Enabled  ```"
-                            spannung = micron_e_die_3733_scharf_spannung
-                            timings = micron_e_die_3733_scharf_timings
-                            rtts = micron_e_die_3733_scharf_rtts
-                        else:
-                            await ctx.send(
-                                "Es konnte keine Daten für das angegebene Preset gefunden werden."
-                            )
-                            return
-                    elif memclk == 3800:
-                        if preset == "lasch":
-                            title = "**Micron Rev. E 3800 Lasche Timings**"
-                            clk = "```MEMCLK          3800       FCLK           1900\nPowerDownMode   Disabled   GearDownMode   Enabled  ```"
-                            spannung = micron_e_die_3800_lasch_spannung
-                            timings = micron_e_die_3800_lasch_timings
-                            rtts = micron_e_die_3800_lasch_rtts
-                        elif preset == "scharf":
-                            title = "**Micron Rev. E 3800 Scharfe Timings**"
-                            clk = "```MEMCLK          3800       FCLK           1900\nPowerDownMode   Disabled   GearDownMode   Enabled  ```"
-                            spannung = micron_e_die_3800_scharf_spannung
-                            timings = micron_e_die_3800_scharf_timings
-                            rtts = micron_e_die_3800_scharf_rtts
-                        elif preset == "gdmoff":
-                            title = "**Micron Rev. E 3800 GDM OFF Timings**"
-                            clk = "```MEMCLK          3800       FCLK           1900\nPowerDownMode   Disabled   GearDownMode   Disabled  ```"
-                            spannung = micron_e_die_3800_scharf_spannung_gdmoff
-                            timings = micron_e_die_3800_scharf_timings_gdmoff
-                            rtts = micron_e_die_3800_scharf_rtts_gdmoff
-                            cads = micron_e_die_gdmoff_cads
-                        else:
-                            await ctx.send(
-                                "Es konnte keine Daten für das angegebene Preset gefunden werden."
-                            )
-                            return
-                    else:
-                        await ctx.send(
-                            "Es konnten keine Daten für den angegebenen RAM Takt gefunden werden."
-                        )
-                        return
-                else:
-                    await ctx.send(
-                        "Es konnten keine Daten für die angegebenen Speicher-ICs gefunden werden."
-                    )
-                    return
-            elif vendor == "hynix":
-                if ics == "cjr":
-                    cads = hynix_cjr_cads
-                    if memclk == 3600:
-                        if preset == "lasch":
-                            title = "**Hynix CJR 3600 Lasche Timings**"
-                            clk = "```MEMCLK          3600       FCLK           1800\nPowerDownMode   Disabled   GearDownMode   Enabled  ```"
-                            spannung = hynix_cjr_3600_spannung
-                            timings = hynix_cjr_3600_timings
-                            rtts = hynix_cjr_3600_rtts
-                        else:
-                            await ctx.send(
-                                "Es konnte keine Daten für das angegebene Preset gefunden werden."
-                            )
-                            return
-                    else:
-                        await ctx.send(
-                            "Es konnten keine Daten für den angegebenen RAM Takt gefunden werden."
-                        )
-                        return
-                else:
-                    await ctx.send(
-                        "Es konnten keine Daten für die angegebenen Speicher-ICs gefunden werden."
-                    )
-                    return
-            else:
-                await ctx.send("Der Hersteller konnte nicht gefunden werden.")
-                return
+            vendor = vendor.lower()
+            ics = ics.lower()
+            preset = preset.lower()
+            generation = generation.lower()
+            agcm = gspread_asyncio.AsyncioGspreadClientManager(get_creds)
+            agc = await agcm.authorize()
+            document = await agc.open("loretta_timings")
+            worksheet = await document.get_worksheet(0)
+            table_data = await worksheet.get_all_records()
 
-        embed = discord.Embed(
-            colour=0xE74C3C,
-        )
-        embed.add_field(
-            name="**Preset:**",
-            value=title,
-            inline="false",
-        )
-        embed.add_field(
-            name="**Taktraten:**",
-            value=clk,
-            inline="false",
-        )
-        embed.add_field(
-            name="**Spannungen:**",
-            value=spannung,
-            inline="false",
-        )
-        embed.add_field(
-            name="**Timings:**",
-            value=timings,
-            inline="false",
-        )
-        embed.add_field(
-            name="**RTTs:**",
-            value=rtts,
-            inline="false",
-        )
-        embed.add_field(
-            name="**CADs:**",
-            value=cads,
-            inline="false",
-        )
-        embed.set_author(name=f"Lorettas Timings")
-        await ctx.send(embed=embed)
+            timings_data = {}
+
+            for data in table_data:
+                if data["Vendor"] == vendor:
+                    if data["ICs"] == ics:
+                        if str(data["MEMCLK"]) == memclk:
+                            if data["Preset"] == preset:
+                                if data["Generation"] == generation:
+                                    timings_data = data
+
+            if not timings_data:
+                await ctx.send(
+                    "Es wurde kein Preset für die angegebenen Daten gefunden."
+                )
+            else:
+                base_settings = tabulate(
+                    [
+                        ["MEMCLK", f"{timings_data['MEMCLK']}"],
+                        ["FCLK", f"{timings_data['FCLK']}"],
+                        ["PowerDownMode", f"{timings_data['PDM']}"],
+                        ["GearDownMode", f"{timings_data['GDM']}"],
+                    ],
+                    tablefmt="plain",
+                )
+
+                voltages = tabulate(
+                    [
+                        ["VDIMM", f"{timings_data['VDIMM']}"],
+                        ["VSOC", f"{timings_data['VSOC']}"],
+                        ["VDDG", f"{timings_data['VDDG']}"],
+                        ["CLDO VDDP", f"{timings_data['CLDO VDDP']}"],
+                        
+                    ],
+                    tablefmt="plain",
+                    colalign=("left", "right"),
+                )
+
+                timings = tabulate(
+                    [
+                        [
+                            "tCL",
+                            f"{timings_data['tCL']}",
+                            "tWRWRSCL",
+                            f"{timings_data['tWRWRSCL']}",
+                        ],
+                        [
+                            "tRCDRD",
+                            f"{timings_data['tRCDRD']}",
+                            "tRFC",
+                            f"{timings_data['tRFC']}",
+                        ],
+                        [
+                            "tRCDWR",
+                            f"{timings_data['tRCDWR']}",
+                            "tCWL",
+                            f"{timings_data['tCWL']}",
+                        ],
+                        [
+                            "tRP",
+                            f"{timings_data['tRP']}",
+                            "tRTP",
+                            f"{timings_data['tRTP']}",
+                        ],
+                        [
+                            "tRAS",
+                            f"{timings_data['tRAS']}",
+                            "tRDWR",
+                            f"{timings_data['tRDWR']}",
+                        ],
+                        [
+                            "tRC",
+                            f"{timings_data['tRC']}",
+                            "tWRRD",
+                            f"{timings_data['tWRRD']}",
+                        ],
+                        [
+                            "tRRDS",
+                            f"{timings_data['tRRDS']}",
+                            "tWRWRSC",
+                            f"{timings_data['tWRWRSC']}",
+                        ],
+                        [
+                            "tRRDL",
+                            f"{timings_data['tRRDL']}",
+                            "tWRWRSD",
+                            f"{timings_data['tWRWRSD']}",
+                        ],
+                        [
+                            "tFAW",
+                            f"{timings_data['tFAW']}",
+                            "tWRWRDD",
+                            f"{timings_data['tWRWRDD']}",
+                        ],
+                        [
+                            "tWTRS",
+                            f"{timings_data['tWTRS']}",
+                            "tRDRDSC",
+                            f"{timings_data['tRDRDSC']}",
+                        ],
+                        [
+                            "tWTRL",
+                            f"{timings_data['tWTRL']}",
+                            "tRDRDSD",
+                            f"{timings_data['tRDRDSD']}",
+                        ],
+                        [
+                            "tWR",
+                            f"{timings_data['tWR']}",
+                            "tRDRDDD",
+                            f"{timings_data['tRDRDDD']}",
+                        ],
+                        [
+                            "tRDRDSCL",
+                            f"{timings_data['tRDRDSCL']}",
+                            "tCKE",
+                            f"{timings_data['tCKE']}",
+                        ],
+                    ],
+                    tablefmt="plain",
+                    colalign=("left", "right", "left", "right"),
+                )
+
+                rtts = tabulate(
+                    [["2x8GB\n2x16GB\n4x8GB\n4x16GB", f"{timings_data['RTTs']}"]],
+                    tablefmt="plain",
+                    colalign=("left", "left"),
+                )
+
+                embed = discord.Embed(
+                    colour=0xE74C3C,
+                )
+                embed.add_field(
+                    name="**Preset:**",
+                    value=f"**{timings_data['Name'].title()}**",
+                    inline="false",
+                )
+                embed.add_field(
+                    name="**Taktraten:**",
+                    value=f"```{base_settings}```",
+                    inline="false",
+                )
+                embed.add_field(
+                    name="**Spannungen:**",
+                    value=f"```{voltages}```",
+                    inline="false",
+                )
+                embed.add_field(
+                    name="**Timings:**",
+                    value=f"```{timings}```",
+                    inline="false",
+                )
+                embed.add_field(
+                    name="**ProcODT:**",
+                    value=f"```{timings_data['ProcODT']}```",
+                    inline="false",
+                )
+                embed.add_field(
+                    name="**RTTs:**",
+                    value=f"```{rtts}```",
+                    inline="false",
+                )
+                embed.add_field(
+                    name="**CADs:**",
+                    value=f"```{timings_data['CADs']}```",
+                    inline="false",
+                )
+                embed.set_author(name=f"Lorettas Timings")
+                await ctx.send(embed=embed)
 
 
 def setup(bot):

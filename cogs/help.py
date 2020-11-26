@@ -1,12 +1,28 @@
 import discord
 from discord.ext import commands
 
+import gspread_asyncio
+from oauth2client.service_account import ServiceAccountCredentials
+
+
+def get_creds():
+    return ServiceAccountCredentials.from_json_keyfile_name(
+        "creds.json",
+        [
+            "https://spreadsheets.google.com/feeds",
+            "https://www.googleapis.com/auth/drive",
+            "https://www.googleapis.com/auth/spreadsheets",
+        ],
+    )
+
 
 class Help(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.group(name="help", aliases=["hilfe", "h"], invoke_without_command=True)
+    @commands.group(
+        name="help", aliases=["hilfe", "h", "befehle"], invoke_without_command=True
+    )
     async def help_base(self, ctx):
         embed = discord.Embed(
             colour=0xE74C3C,
@@ -14,11 +30,6 @@ class Help(commands.Cog):
         embed.add_field(
             name="**Lorettas Anleitungen:**",
             value="```!bios        !cpu    !limit    !mainboard\n!anleitung   !ram    !spd      !ergebnisse```",
-            inline="false",
-        )
-        embed.add_field(
-            name="**Lorettas Timings Presets:**",
-            value="```!timings *hersteller* *ics* *takt* *preset*\n\nZum Beispiel:\n!timings samsung bdie 3733 scharf\n\nAktuell hinterlegte Presets:\nsamsung bdie:\n\t3600 (lasch&scharf)\n\t3733 (lasch&scharf)\n\t3800 (lasch&scharf)\nsamsung cdie:\n\t3600 (lasch)\nmicron edie:\n\t3600 (lasch)\n\t3733 (lasch&scharf)\n\t3800 (lasch&scharf)\nhynix cjr:\n\t3600 (lasch)```",
             inline="false",
         )
         embed.add_field(
@@ -73,6 +84,32 @@ class Help(commands.Cog):
         )
         embed.set_author(
             name="Lorettas spezifische Spezifikationen",
+        )
+        await ctx.send(embed=embed)
+
+    @help_base.command(name="timings", aliases=["preset", "presets"])
+    async def help_timings(self, ctx):
+        agcm = gspread_asyncio.AsyncioGspreadClientManager(get_creds)
+        agc = await agcm.authorize()
+        document = await agc.open("loretta_timings")
+        worksheet = await document.get_worksheet(0)
+        values_list = await worksheet.col_values(2)
+        new_line = "\n"
+        embed = discord.Embed(
+            colour=0xE74C3C,
+        )
+        embed.add_field(
+            name="**Timing Presets abrufen:**",
+            value="```!timings *hersteller* *ics* *takt* *preset* *cpu generation*\n\nZum Beispiel:\n!timings samsung bdie 3733 scharf zen2```",
+            inline="false",
+        )
+        embed.add_field(
+            name="**Aktuell verfügbare Presets:**",
+            value=f"```{new_line.join(sorted(values_list[1:]))}```",
+            inline="false",
+        )
+        embed.set_author(
+            name="Lorettas RAM Timing Presets",
         )
         await ctx.send(embed=embed)
 
