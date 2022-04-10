@@ -17,7 +17,7 @@ bot = commands.Bot(
     activity=disnake.Game(name=bot_activity),
     case_insensitive=True,
     owner_id=owner_id,
-    intents=intents
+    intents=intents,
 )
 
 bot.remove_command("help")

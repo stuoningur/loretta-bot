@@ -5,6 +5,4 @@ gspread_asyncio
 oauth2client
 tabulate
 google-api-python-client
-requests
-feedparser
 aiohttp

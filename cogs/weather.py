@@ -8,62 +8,63 @@ from tabulate import tabulate
 
 locale.setlocale(locale.LC_TIME, "de_DE")
 
-ICONS = {200: "🌩️",
-         201: "🌩️",
-         202: "🌩️",
-         210: "🌩️",
-         211: "🌩️",
-         212: "🌩️",
-         221: "🌩️",
-         230: "🌩️",
-         231: "🌩️",
-         232: "🌩️",
-         300: "🌧️",
-         301: "🌧️",
-         302: "🌧️",
-         310: "🌧️",
-         311: "🌧️",
-         312: "🌧️",
-         313: "🌧️",
-         314: "🌧️",
-         321: "🌧️",
-         500: "🌦️",
-         501: "🌦️",
-         502: "🌦️",
-         503: "🌦️",
-         504: "🌦️",
-         511: "🌦️",
-         520: "🌦️",
-         521: "🌦️",
-         522: "🌦️",
-         531: "🌦️",
-         600: "🌨️",
-         601: "🌨️",
-         602: "🌨️",
-         611: "🌨️",
-         612: "🌨️",
-         613: "🌨️",
-         615: "🌨️",
-         616: "🌨️",
-         620: "🌨️",
-         621: "🌨️",
-         622: "🌨️",
-         701: "🌫️",
-         711: "🌫️",
-         721: "🌫️",
-         731: "🌫️",
-         741: "🌫️",
-         751: "🌫️",
-         761: "🌫️",
-         762: "🌫️",
-         771: "🌫️",
-         781: "🌫️",
-         800: "☀️",
-         801: "⛅",
-         802: "⛅",
-         803: "⛅",
-         804: "⛅",
-         }
+ICONS = {
+    200: "🌩️",
+    201: "🌩️",
+    202: "🌩️",
+    210: "🌩️",
+    211: "🌩️",
+    212: "🌩️",
+    221: "🌩️",
+    230: "🌩️",
+    231: "🌩️",
+    232: "🌩️",
+    300: "🌧️",
+    301: "🌧️",
+    302: "🌧️",
+    310: "🌧️",
+    311: "🌧️",
+    312: "🌧️",
+    313: "🌧️",
+    314: "🌧️",
+    321: "🌧️",
+    500: "🌦️",
+    501: "🌦️",
+    502: "🌦️",
+    503: "🌦️",
+    504: "🌦️",
+    511: "🌦️",
+    520: "🌦️",
+    521: "🌦️",
+    522: "🌦️",
+    531: "🌦️",
+    600: "🌨️",
+    601: "🌨️",
+    602: "🌨️",
+    611: "🌨️",
+    612: "🌨️",
+    613: "🌨️",
+    615: "🌨️",
+    616: "🌨️",
+    620: "🌨️",
+    621: "🌨️",
+    622: "🌨️",
+    701: "🌫️",
+    711: "🌫️",
+    721: "🌫️",
+    731: "🌫️",
+    741: "🌫️",
+    751: "🌫️",
+    761: "🌫️",
+    762: "🌫️",
+    771: "🌫️",
+    781: "🌫️",
+    800: "☀️",
+    801: "⛅",
+    802: "⛅",
+    803: "⛅",
+    804: "⛅",
+}
 
 
 class Weather(commands.Cog):
@@ -75,7 +76,9 @@ class Weather(commands.Cog):
     async def wetter(self, ctx, *, arg):
         forecast = {}
         current_weather = {}
-        url_cords = f"http://api.openweathermap.org/geo/1.0/direct?q={arg}&appid={self.api_key}"
+        url_cords = (
+            f"http://api.openweathermap.org/geo/1.0/direct?q={arg}&appid={self.api_key}"
+        )
         async with aiohttp.ClientSession() as session:
             async with session.get(url_cords) as response:
                 data = await response.json()
@@ -84,7 +87,9 @@ class Weather(commands.Cog):
                     lat = data[0]["lat"]
                     if "local_names" in data[0]:
                         if "de" in data[0]["local_names"]:
-                            location = f'{data[0]["local_names"]["de"]}, {data[0]["country"]}'
+                            location = (
+                                f'{data[0]["local_names"]["de"]}, {data[0]["country"]}'
+                            )
                         else:
                             location = f'{data[0]["local_names"]["feature_name"]}, {data[0]["country"]}'
                     else:
@@ -93,34 +98,67 @@ class Weather(commands.Cog):
                     async with aiohttp.ClientSession() as session:
                         async with session.get(url) as response:
                             data = await response.json()
-                            current_weather["timestamp"] = datetime.datetime.fromtimestamp(
-                                data["current"]["dt"]).strftime("%d.%m.%y %H:%M")
-                            current_weather["weather_desc"] = data["current"]["weather"][0]["description"]
-                            current_weather["temp"] = int(
-                                data["current"]["temp"])
+                            current_weather[
+                                "timestamp"
+                            ] = datetime.datetime.fromtimestamp(
+                                data["current"]["dt"]
+                            ).strftime(
+                                "%d.%m.%y %H:%M"
+                            )
+                            current_weather["weather_desc"] = data["current"][
+                                "weather"
+                            ][0]["description"]
+                            current_weather["temp"] = int(data["current"]["temp"])
                             current_weather["feels_like"] = int(
-                                data["current"]["feels_like"])
-                            current_weather["icon"] = data["current"]["weather"][0]["icon"]
+                                data["current"]["feels_like"]
+                            )
+                            current_weather["icon"] = data["current"]["weather"][0][
+                                "icon"
+                            ]
                             current_weather["humidity"] = data["current"]["humidity"]
-                            current_weather["wind_speed"] = int(data["current"]["wind_speed"] * 3.6)
-                            current_weather["temp_morning"] = int(data["daily"][0]["temp"]["morn"])
-                            current_weather["temp_day"] = int(data["daily"][0]["temp"]["day"])
-                            current_weather["temp_eve"] = int(data["daily"][0]["temp"]["eve"])
-                            current_weather["temp_night"] = int(data["daily"][0]["temp"]["night"])
-                            current_weather["weather"] = data["daily"][0]["weather"][0]["description"]
+                            current_weather["wind_speed"] = int(
+                                data["current"]["wind_speed"] * 3.6
+                            )
+                            current_weather["temp_morning"] = int(
+                                data["daily"][0]["temp"]["morn"]
+                            )
+                            current_weather["temp_day"] = int(
+                                data["daily"][0]["temp"]["day"]
+                            )
+                            current_weather["temp_eve"] = int(
+                                data["daily"][0]["temp"]["eve"]
+                            )
+                            current_weather["temp_night"] = int(
+                                data["daily"][0]["temp"]["night"]
+                            )
+                            current_weather["weather"] = data["daily"][0]["weather"][0][
+                                "description"
+                            ]
                             current_weather["pop"] = int(data["daily"][0]["pop"] * 100)
                             for day in range(1, 7):
                                 forecast[day] = {}
-                                forecast[day]["timestamp"] = datetime.datetime.fromtimestamp(
-                                    data["daily"][day]["dt"]).strftime("%a %d.%m.")
-                                forecast[day]["weather_desc"] = data["daily"][day]["weather"][0]["description"]
+                                forecast[day][
+                                    "timestamp"
+                                ] = datetime.datetime.fromtimestamp(
+                                    data["daily"][day]["dt"]
+                                ).strftime(
+                                    "%a %d.%m."
+                                )
+                                forecast[day]["weather_desc"] = data["daily"][day][
+                                    "weather"
+                                ][0]["description"]
                                 forecast[day]["temp_min"] = int(
-                                    data["daily"][day]["temp"]["min"])
+                                    data["daily"][day]["temp"]["min"]
+                                )
                                 forecast[day]["temp_max"] = int(
-                                    data["daily"][day]["temp"]["max"])
+                                    data["daily"][day]["temp"]["max"]
+                                )
                                 forecast[day]["pop"] = int(
-                                    data["daily"][day]["pop"] * 100)
-                                forecast[day]["icon"] = data["daily"][day]["weather"][0]["id"]
+                                    data["daily"][day]["pop"] * 100
+                                )
+                                forecast[day]["icon"] = data["daily"][day]["weather"][
+                                    0
+                                ]["id"]
                     embed = disnake.Embed(
                         title=f"Wetter für {location}",
                         colour=0xE74C3C,
@@ -132,7 +170,7 @@ class Weather(commands.Cog):
                                 embed.add_field(
                                     name=f"Wetterwarnung: {alert['event']}",
                                     value=f"{alert['description']}\nGültig {datetime.datetime.fromtimestamp(alert['start']).strftime('%d.%m. %H:%M')} bis {datetime.datetime.fromtimestamp(alert['end']).strftime('%d.%m. %H:%M')}",
-                                    inline=False
+                                    inline=False,
                                 )
                     table = []
                     buffer = []
@@ -153,17 +191,16 @@ class Weather(commands.Cog):
                     embed.add_field(
                         name="\u200b",
                         value=f"```{tabulate(table, tablefmt='plain')}```",
-                        inline=False
+                        inline=False,
                     )
 
                     embed.set_thumbnail(
-                        url=f"http://openweathermap.org/img/wn/{current_weather['icon']}@2x.png")
+                        url=f"http://openweathermap.org/img/wn/{current_weather['icon']}@2x.png"
+                    )
                     embed.set_author(
                         name="Loretta der Wetterfrosch",
                     )
-                    embed.set_footer(
-                        text=f"Stand: {current_weather['timestamp']}"
-                    )
+                    embed.set_footer(text=f"Stand: {current_weather['timestamp']}")
                     await ctx.send(embed=embed)
                 else:
                     await ctx.send("Der Ort konnte nicht gefunden werden.")

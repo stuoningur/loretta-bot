@@ -22,7 +22,7 @@ class Utilities(commands.Cog):
     async def on_member_remove(self, member):
         today = datetime.datetime.now()
         time = today.strftime("%d.%m.%Y %H:%M")
-        channel = self.bot.get_channel(self.bot.log_channel)
+        channel = self.bot.get_channel(int(self.bot.log_channel))
         await channel.send(
             f"Der User {member.display_name} hat den Server am {time} verlassen. Die User ID ist {str(member.id)}"
         )
